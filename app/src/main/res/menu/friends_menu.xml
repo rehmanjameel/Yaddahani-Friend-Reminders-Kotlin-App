@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/friendReminderFragmentId"
+        android:title="Reminders"
+        android:icon="@drawable/ic_pending_actions"/>
+
+    <item
+        android:id="@+id/friendListFragmentId"
+        android:title="Friends"
+        android:icon="@drawable/ic_friends"/>
+
+
+    <item
+        android:id="@+id/profileFragmentId"
+        android:title="Profile"
+        android:icon="@drawable/profile"/>
+</menu>

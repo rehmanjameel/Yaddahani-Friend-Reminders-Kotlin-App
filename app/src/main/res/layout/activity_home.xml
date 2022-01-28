@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
+    tools:context=".friendsmodule.HomeActivity">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:layout_width="409dp"
+        android:layout_height="match_parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_above="@id/smoothBottomId"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/home_nav_graph"/>
+
+
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNav"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        app:menu="@menu/friends_menu"-->
+<!--        app:labelVisibilityMode="selected"/>-->
+
+    <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/smoothBottomId"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        app:iconTint="#808080"
+        app:textColor="#4d79ff"
+        android:visibility="visible"
+        app:indicatorColor="#b3c6ff"
+        app:iconTintActive="#4d79ff"
+        app:menu="@menu/friends_menu"/>
+
+    <ProgressBar
+        android:id="@+id/openingAppProgress_Bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:indeterminate = "true"
+        android:max="100"
+        android:minWidth="200dp"
+        android:minHeight="50dp"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        android:progress="0"
+        android:layout_marginStart="70dp" />
+</RelativeLayout>

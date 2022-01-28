@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/friendReminderFragmentId">
+
+    <fragment
+        android:id="@+id/friendListFragmentId"
+        android:name="com.example.yaddahani.friendsmodule.FriendListFragment"
+        android:label="Friend List"
+        tools:layout="@layout/fragment_friend_list" >
+        <action
+            android:id="@+id/action_friendListFragmentId_to_searchFriendFragment"
+            app:destination="@id/searchFriendFragment" />
+
+        <action
+            android:id="@+id/action_friendListFragmentId_to_reminderFriendFragment"
+            app:destination="@id/reminderFriendFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/friendReminderFragmentId"
+        android:name="com.example.yaddahani.friendsmodule.FriendReminderFragment"
+        android:label="Friend Reminder"
+        tools:layout="@layout/fragment_friend_reminder" >
+        <action
+            android:id="@+id/action_friendReminderFragmentId_to_showReceivedRemindersFragment"
+            app:destination="@id/showReceivedRemindersFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragmentId"
+        android:name="com.example.yaddahani.friendsmodule.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragmentId_to_updateUserFragment"
+            app:destination="@id/updateUserFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFriendFragment"
+        android:name="com.example.yaddahani.friendsmodule.SearchFriendFragment"
+        android:label="fragment_search_friend"
+        tools:layout="@layout/fragment_search_friend" >
+        <action
+            android:id="@+id/action_searchFriendFragment_to_friendListFragmentId"
+            app:destination="@id/friendListFragmentId" />
+        <action
+            android:id="@+id/action_searchFriendFragment_to_sendFriendRequestFragment"
+            app:destination="@id/sendFriendRequestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/updateUserFragment"
+        android:name="com.example.yaddahani.friendsmodule.UpdateUserFragment"
+        android:label="fragment_update_user"
+        tools:layout="@layout/fragment_update_user" >
+        <action
+            android:id="@+id/action_updateUserFragment_to_profileFragmentId"
+            app:destination="@id/profileFragmentId" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sendFriendRequestFragment"
+        android:name="com.example.yaddahani.friendsmodule.SendFriendRequestFragment"
+        android:label="fragment_send_friend_request"
+        tools:layout="@layout/fragment_send_friend_request" >
+        <action
+            android:id="@+id/action_sendFriendRequestFragment_to_searchFriendFragment"
+            app:destination="@id/searchFriendFragment" />
+        <argument
+            android:name="searchUsers"
+            app:argType="com.example.yaddahani.models.SearchUserModel"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/reminderFriendFragment"
+        android:name="com.example.yaddahani.reminders.SendReminderToFriendFragment"
+        android:label="fragment_reminder_friend"
+        tools:layout="@layout/fragment_send_reminder_friend" >
+        <action
+            android:id="@+id/action_reminderFriendFragment_to_friendListFragmentId"
+            app:destination="@id/friendListFragmentId" />
+        <argument
+            android:name="friendsList"
+            app:argType="com.example.yaddahani.models.FriendModel"/>
+        <action
+            android:id="@+id/action_reminderFriendFragment_to_addSendReminderFragment"
+            app:destination="@id/addSendReminderFragment" />
+        <action
+            android:id="@+id/action_reminderFriendFragment_to_showSentRemindersFragment"
+            app:destination="@id/showSentRemindersFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/addSendReminderFragment"
+        android:name="com.example.yaddahani.reminders.AddSendReminderFragment"
+        android:label="fragment_add_send_reminder"
+        tools:layout="@layout/fragment_add_send_reminder" >
+
+        <argument
+            android:name="sendReminderToFriend"
+            app:argType="com.example.yaddahani.models.FriendModel"/>
+
+        <action
+            android:id="@+id/action_addSendReminderFragment_to_reminderFriendFragment"
+            app:destination="@id/reminderFriendFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/showSentRemindersFragment"
+        android:name="com.example.yaddahani.reminders.ShowSentRemindersFragment"
+        android:label="fragment_show_sent_reminders"
+        tools:layout="@layout/fragment_show_sent_reminders" >
+
+        <action
+            android:id="@+id/action_showSentRemindersFragment_to_reminderFriendFragment"
+            app:destination="@id/reminderFriendFragment" />
+
+        <argument
+            android:name="sentReminders"
+            app:argType="com.example.yaddahani.models.SentRemindersListModel"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/showReceivedRemindersFragment"
+        android:name="com.example.yaddahani.reminders.ShowReceivedRemindersFragment"
+        android:label="fragment_show_received_reminders"
+        tools:layout="@layout/fragment_show_received_reminders" >
+        <action
+            android:id="@+id/action_showReceivedRemindersFragment_to_friendReminderFragmentId"
+            app:destination="@id/friendReminderFragmentId" />
+        <argument
+            android:name="receivedReminders"
+            app:argType="com.example.yaddahani.models.FriendsRemindersListModel"/>
+
+    </fragment>
+
+</navigation>

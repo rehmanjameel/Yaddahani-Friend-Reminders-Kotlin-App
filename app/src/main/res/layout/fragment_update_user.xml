@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".friendsmodule.UpdateUserFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/updateBackArrowId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:layout_marginStart="20dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/email_verification_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/updateProfileImageView"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:civ_border_width="1dp"
+                        app:civ_circle_background_color="#e6e6e6"
+                        android:src="@drawable/persons" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#607d8b"
+                        app:boxBackgroundColor="#e6e6e6"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/updateFirstNameETId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName|textCapWords"
+                            android:textColorHint="#607d8b"
+                            android:paddingLeft="10dp"
+                            android:maxLines="1"
+                            android:hint="First Name"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#607d8b"
+                        app:boxBackgroundColor="#e6e6e6"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/updateLastNameETId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="#607d8b"
+                            android:inputType="textPersonName|textCapWords"
+                            android:maxLines="1"
+                            android:paddingLeft="10dp"
+                            android:hint="Last Name"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxStrokeColor="#607d8b"
+                        app:boxBackgroundColor="#e6e6e6"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/updateContactETId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:inputType="phone"
+                            android:textColorHint="#607d8b"
+                            android:paddingLeft="10dp"
+                            android:hint="Contact"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/updateRadioGroupId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/maleRadioButtonId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:buttonTint="@color/purple_700"
+                        android:checked="true"
+                        android:text="Male"/>
+
+                    <RadioButton
+                        android:id="@+id/femaleRadioButtonId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:buttonTint="@color/purple_700"
+                        android:text="Female"/>
+
+                    <RadioButton
+                        android:id="@+id/ratherNotSayRadioButtonId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:buttonTint="@color/purple_700"
+                        android:text="Rather not say"/>
+
+                </RadioGroup>
+
+                <Button
+                    android:id="@+id/updateProfileButtonId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:layout_gravity="center"
+                    android:layout_margin="20dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

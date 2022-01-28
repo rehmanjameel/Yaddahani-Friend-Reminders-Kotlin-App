@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".friendsmodule.ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.1"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageId"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/persons"
+                android:layout_centerInParent="true"
+                app:civ_border_width="1dp"
+                app:civ_circle_background_color="#e6e6e6" />
+
+            <ImageView
+                android:id="@+id/updateUserIconId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="40dp"/>
+
+            <ImageView
+                android:id="@+id/deleteProfileIconId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                android:layout_marginTop="3dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/fragments_layout_background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/profileUserNameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User Name"
+                        android:textSize="16sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/profileNameId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="First Name"
+                        android:textSize="16sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:padding="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/profileDoBId"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="DoB"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:textColor="@color/black"/>-->
+
+<!--                </RelativeLayout>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/profilePhoneId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phone No"
+                        android:textSize="16sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:padding="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/profileEmailId"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Email"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:textColor="@color/black"/>-->
+
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:padding="10dp">-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/profileGenderId"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Gender"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:layout_alignParentStart="true"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:textColor="@color/black"/>-->
+
+<!--                </RelativeLayout>-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/profileProgress_Bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:indeterminate = "true"
+        android:max="100"
+        android:minWidth="200dp"
+        android:minHeight="50dp"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        android:progress="0"
+        android:layout_marginStart="70dp" />
+
+</RelativeLayout>
