@@ -107,7 +107,7 @@ class RegistrationFragment : Fragment() {
         registerPassword = view.findViewById(R.id.userPasswordETId)
         radioGroup = view.findViewById(R.id.radioGroupId)
 
-        sharedPreferences = this.activity!!.getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
+        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
         registrationButton.setOnClickListener {
             registerUser()
 //            findNavController().navigate(R.id.action_registrationFragment_to_emailVerificationFragment)
@@ -286,9 +286,9 @@ class RegistrationFragment : Fragment() {
             }
         }
 
-        httpRequest.setOnErrorListener { response ->
-            Log.e("Registration Error", response.reason)
-//            Log.e("Response Error", "$it")
+        httpRequest.setOnErrorListener {
+//            Log.e("Registration Error", response.reason)
+            Log.e("Response Error", it.reason)
         }
 
         val formData = FormData()

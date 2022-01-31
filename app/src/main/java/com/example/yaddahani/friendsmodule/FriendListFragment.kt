@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -17,10 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.yaddahani.AlarmReceiver
-import com.example.yaddahani.AppGlobals
-import com.example.yaddahani.MainActivity
-import com.example.yaddahani.R
+import com.example.yaddahani.*
 import com.example.yaddahani.adapters.FriendListAdapter
 import com.example.yaddahani.adapters.FriendsPendingRequestAdapter
 import com.example.yaddahani.adapters.FriendsRemindersListAdapter
@@ -64,8 +63,22 @@ class FriendListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_friend_list, container, false)
+        // Inflate the layout for this
+        val view = inflater.inflate(R.layout.fragment_friend_list, container, false)
+
+        val loadingDialog = LoadingDialog(requireActivity())
+
+        loadingDialog.startDialog()
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                loadingDialog.dismissDialog()
+            }, 1000)
+
+//        progressBar = view.friendsListProgress_Bar
+//        progressBar!!.visibility = View.VISIBLE
+//        i = progressBar!!.progress
+
+        return view
     }
 
     //
@@ -76,10 +89,6 @@ class FriendListFragment : Fragment() {
 //        bottomNavigationView.visibility = View.VISIBLE
 
         isForeGround = true
-
-        progressBar = view.friendsListProgress_Bar
-//        progressBar!!.visibility = View.VISIBLE
-//        i = progressBar!!.progress
 
         floatingActionButton = view.findViewById(R.id.addFriendFloatingButton)
 
@@ -159,7 +168,9 @@ class FriendListFragment : Fragment() {
         addHttpRequest.get(AppGlobals.FRIENDS_LIST_API, headers)
 
 //        if (isForeGround) {
+//        if (progressBar != null) {
 //            progressBar!!.visibility = View.GONE
+//        }
 //        }
     }
 

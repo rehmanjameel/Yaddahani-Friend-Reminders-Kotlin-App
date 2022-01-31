@@ -38,13 +38,12 @@
                 android:hint="Search"
                 android:textColorHint="#bfbfbf"
                 android:textColor="@color/white"
-                android:maxLines="1"
                 android:singleLine="true"
                 android:imeOptions="actionSearch"
                 android:textCursorDrawable="@drawable/cursor_shape"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/edit_text_shape"
-                android:padding="10dp"/>
+                android:padding="15dp"/>
 
         </LinearLayout>
 

@@ -5,9 +5,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.Parcelable
+import android.os.*
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -89,7 +87,7 @@ class FriendReminderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.friendListReminderRecyclerView
-        getReminderListAdapter = FriendsRemindersListAdapter(activity!!)
+        getReminderListAdapter = FriendsRemindersListAdapter(requireActivity())
 
         recyclerView.adapter = getReminderListAdapter
         getReminderListAdapter.notifyDataSetChanged()
@@ -111,10 +109,16 @@ class FriendReminderFragment : Fragment() {
         })
 //        Log.e("Sere", getRemindersDBList.toString())
         //
-        progressBar = view.progress_Bar
+//        progressBar = view.progress_Bar
 //        progressBar!!.visibility = View.VISIBLE
 //        i = progressBar!!.progress
+        val loadingDialog = LoadingDialog(requireActivity())
 
+        loadingDialog.startDialog()
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                loadingDialog.dismissDialog()
+            }, 1000)
         actionMoreButton = view.moreMenuOptionId
         actionMoreButton.setOnClickListener {
             showPopup()
@@ -159,7 +163,7 @@ class FriendReminderFragment : Fragment() {
                     val intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().overridePendingTransition(0, 0)
-                    this.activity!!.finish()
+                    this.requireActivity().finish()
                 }
                 R.id.archivedRemindersMenu -> {
                     popup.dismiss()
@@ -190,7 +194,10 @@ class FriendReminderFragment : Fragment() {
                 val mainJsonOj = JSONObject()
 
                 for (i in 0 until jsonArray!!.length()) {
-//                    progressBar!!.progress = i
+
+//                    if (!onForeGround) {
+//                        progressBar!!.progress = i
+//                    }
                     Log.e("listi", i.toString())
 
                     val jsonObject = jsonArray.getJSONObject(i)
@@ -259,13 +266,15 @@ class FriendReminderFragment : Fragment() {
 //                        }
                     }
 
+                    if (friendReminderFromName != loggedInUser) {
+                        reminder = FriendsRemindersListModel(0, friendReminderId.toInt(), friendReminderText, friendReminderDate,
+                            friendReminderFromName, friendReminderToName, friendReminderStatus)
+                    }
+
                 }
                 val loggedInUser = appGlobals.getValueString("loginUsername")
 
-                if (friendReminderFromName != loggedInUser) {
-                    reminder = FriendsRemindersListModel(0, friendReminderId.toInt(), friendReminderText, friendReminderDate,
-                        friendReminderFromName, friendReminderToName, friendReminderStatus)
-                }
+
 
                 if (getReminderListModel.size.toString() > remindersListModel.size.toString()) {
 
@@ -296,7 +305,6 @@ class FriendReminderFragment : Fragment() {
 //                        for (k in 0 until getReminderListModel.size - 1) {
 //                            Log.e("delete1", remindersListModel[k].reminderId.toString())
 ////                        Log.e("delete2", getReminderListModel[i].reminderId.toString())
-//
 //
 //                        }
 //                        if (isRemoved) {
@@ -344,7 +352,9 @@ class FriendReminderFragment : Fragment() {
 //                Log.e("reminderId", model.reminderId.toString())
 //                if (friendReminderId > model.reminderId.toString()) {
 
-//                progressBar!!.visibility = View.GONE
+//                if (progressBar != null) {
+//                    progressBar!!.visibility = View.GONE
+//                }
             }
         }
 

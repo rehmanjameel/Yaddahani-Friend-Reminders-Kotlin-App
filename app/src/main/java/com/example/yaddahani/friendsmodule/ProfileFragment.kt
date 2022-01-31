@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.yaddahani.AppGlobals
+import com.example.yaddahani.LoadingDialog
 import com.example.yaddahani.MainActivity
 import com.example.yaddahani.R
 import de.hdodenhof.circleimageview.CircleImageView
@@ -60,8 +63,15 @@ class ProfileFragment : Fragment() {
         bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.VISIBLE
 
-        progressBar = view.profileProgress_Bar
-        progressBar!!.visibility = View.VISIBLE
+//        progressBar = view.profileProgress_Bar
+//        progressBar!!.visibility = View.VISIBLE
+        val loadingDialog = LoadingDialog(requireActivity())
+
+        loadingDialog.startDialog()
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                loadingDialog.dismissDialog()
+            }, 500)
 
         updateIconImage = view.findViewById(R.id.updateUserIconId)
         popUpMenuIcon = view.deleteProfileIconId
@@ -139,7 +149,7 @@ class ProfileFragment : Fragment() {
                 appGlobals.saveString("profileContact", profilePhone)
                 appGlobals.saveString("profileGender", profileGender)
 
-                progressBar!!.visibility = View.GONE
+//                progressBar!!.visibility = View.GONE
             }
         }
 

@@ -77,8 +77,7 @@ class LoginFragment : Fragment() {
 
         //
         loginButton.setOnClickListener {
-            progressBar!!.visibility = View.VISIBLE
-            progressBar!!.progress = 100
+
             loginUser()
         }
 
@@ -102,6 +101,8 @@ class LoginFragment : Fragment() {
             userPasswordEditText.error = "User password required"
         } else {
             loginRequest()
+            progressBar!!.visibility = View.VISIBLE
+            progressBar!!.progress = 100
         }
     }
 
@@ -137,6 +138,8 @@ class LoginFragment : Fragment() {
                 appGlobals.saveString("loginUsername", userName)
                 Log.e("Checking", check.toString())
 
+            } else if (loginResponse.code != HttpResponse.HTTP_OK) {
+                progressBar!!.visibility = View.GONE
             }
         }
 
