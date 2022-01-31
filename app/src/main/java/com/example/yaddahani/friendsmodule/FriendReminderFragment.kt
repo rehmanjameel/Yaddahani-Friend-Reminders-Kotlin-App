@@ -86,6 +86,12 @@ class FriendReminderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (!appGlobals.isLoggedInOrGetValueBoolean()) {
+            val intent = Intent(activity, MainActivity::class.java)
+            startActivity(intent)
+            requireActivity().overridePendingTransition(0, 0)
+            this.requireActivity().finish()
+        }
         recyclerView = view.friendListReminderRecyclerView
         getReminderListAdapter = FriendsRemindersListAdapter(requireActivity())
 
@@ -109,7 +115,7 @@ class FriendReminderFragment : Fragment() {
         })
 //        Log.e("Sere", getRemindersDBList.toString())
         //
-//        progressBar = view.progress_Bar
+        progressBar = view.progress_Bar
 //        progressBar!!.visibility = View.VISIBLE
 //        i = progressBar!!.progress
         val loadingDialog = LoadingDialog(requireActivity())
@@ -131,14 +137,6 @@ class FriendReminderFragment : Fragment() {
         onForeGround = true
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        val fragmentGet: Fragment = FriendReminderFragment()
-        val bundle = Bundle()
-        bundle.putSerializable("ReminderId", getRemindersDBList)
-        fragmentGet.arguments = bundle
-    }
-
     override fun onResume() {
         super.onResume()
         val model : FriendsRemindersListModel
@@ -148,7 +146,7 @@ class FriendReminderFragment : Fragment() {
 
 //        model = bundle?.getSerializable("ReminderId") as FriendsRemindersListModel
 
-        getAllFriendsReminders(requireContext())
+        getAllFriendsReminders()
     }
     //
     private fun showPopup() {
@@ -160,6 +158,7 @@ class FriendReminderFragment : Fragment() {
                 R.id.logoutMenuId -> {
                     progressBar!!.visibility = View.VISIBLE
                     appGlobals.logoutOrClearSharedPreference()
+                    appGlobals.saveLoginOrBoolean(false)
                     val intent = Intent(activity, MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().overridePendingTransition(0, 0)
@@ -176,9 +175,9 @@ class FriendReminderFragment : Fragment() {
         popup.show()
     }
 
-    fun getAllFriendsReminders(context: Context) {
+    fun getAllFriendsReminders() {
         val getReminderHttpRequest = HttpRequest()
-        val myList = ArrayList<FriendsRemindersListModel>()
+//        val myList = ArrayList<FriendsRemindersListModel>()
         getReminderHttpRequest.setOnResponseListener { getReminderListResponse ->
 
             Log.e("getReminders List", getReminderListResponse.code.toString())
@@ -190,8 +189,9 @@ class FriendReminderFragment : Fragment() {
                 getReminderListModel.clear()
                 Log.e("list", jsonArray.length().toString())
                 Log.e("list", jsonArray.toString())
-                val jA = JSONArray()
-                val mainJsonOj = JSONObject()
+//                val jA = JSONArray()
+//                val mainJsonOj = JSONObject()
+                val loggedInUser = appGlobals.getValueString("loginUsername")
 
                 for (i in 0 until jsonArray!!.length()) {
 
@@ -209,44 +209,30 @@ class FriendReminderFragment : Fragment() {
                     friendReminderStatus = jsonObject.getString("status")
                     friendReminderId = jsonObject.getString("id")
 
-                    val loggedInUser = appGlobals.getValueString("loginUsername")
-
                     if (friendReminderFromName != loggedInUser) {
                         getReminderListModel.add(FriendsRemindersListModel(0, friendReminderId.toInt(),friendReminderText,
                             friendReminderDate, friendReminderFromName, friendReminderToName, friendReminderStatus))
 
-//                        Log.e("Starts1", getRemindersDBList[1].reminderId.toString())
-
-//                        if (friendReminderId != getRemindersDBList.indexOf(1).toString())
-
 //                        Log.e("listm", getReminderListModel.size.toString())
-                        val newJsonObject = JSONObject()
-                        newJsonObject.put("text", friendReminderText)
-                        newJsonObject.put("fromName", friendReminderFromName)
-                        newJsonObject.put("toName", friendReminderToName)
-                        newJsonObject.put("reminderDate", friendReminderDate)
-                        newJsonObject.put("reminderStatus", friendReminderStatus)
-                        newJsonObject.put("id", friendReminderId)
-                        jA.put(newJsonObject)
-
-                        mainJsonOj.put("reminders", jA)
+//                        val newJsonObject = JSONObject()
+//                        newJsonObject.put("text", friendReminderText)
+//                        newJsonObject.put("fromName", friendReminderFromName)
+//                        newJsonObject.put("toName", friendReminderToName)
+//                        newJsonObject.put("reminderDate", friendReminderDate)
+//                        newJsonObject.put("reminderStatus", friendReminderStatus)
+//                        newJsonObject.put("id", friendReminderId)
+//                        jA.put(newJsonObject)
+//
+//                        mainJsonOj.put("reminders", jA)
 //                        for (j in 0 until getReminderListModel.size) {
 //                            Log.e("forloopsize", j.toString())
 //
 //                        }
 
-
 //                        val newJsonArray = JSONArray()
 //                        jsonArray.put()
 //                        newJsonArray.put(getReminderListModel.toArray().toString())
 //                        Log.e("listnA", jA.toString())
-
-//                        getReminderListAdapter = FriendsRemindersListAdapter(context)
-
-//                        getReminderListAdapter.setReminderData(getReminderListModel)
-
-
-                    //    getReminderListModel.reverse()
 
 //                        if (friendReminderDate.toLong() == System.currentTimeMillis()) {
 //                            //Set Alarm
@@ -266,95 +252,66 @@ class FriendReminderFragment : Fragment() {
 //                        }
                     }
 
-                    if (friendReminderFromName != loggedInUser) {
+                }
+
+                if (friendReminderFromName != loggedInUser) {
+
+                    if (friendReminderId != "") {
                         reminder = FriendsRemindersListModel(0, friendReminderId.toInt(), friendReminderText, friendReminderDate,
                             friendReminderFromName, friendReminderToName, friendReminderStatus)
                     }
 
                 }
-                val loggedInUser = appGlobals.getValueString("loginUsername")
-
-
 
                 if (getReminderListModel.size.toString() > remindersListModel.size.toString()) {
+                    Log.e("i's2", getReminderListModel.size.toString())
+                    Log.e("i's2", remindersListModel.size.toString())
+                    Log.e("listb", jsonArray.length().toString())
 
                     var isPresent = false
-                    for (j in 0 until remindersListModel.size - 1) {
+                    for (j in 0 until getReminderListModel.size -1) {
                         Log.e("present", getReminderListModel[j].reminderId.toString())
-                        Log.e("present", remindersListModel[j].reminderId.toString())
+                        Log.e("present", remindersListModel.toString())
 
-                        if (getReminderListModel[j].reminderId == remindersListModel[j].reminderId) {
-                            isPresent = true
+                        if (remindersListModel.isNotEmpty()) {
+                            if (getReminderListModel[j].reminderId == remindersListModel[j].reminderId) {
+                                isPresent = true
+                            }
                         }
+
                     }
-                    Log.e("present", isPresent.toString())
-                    if (isPresent) {
+                    Log.e("presenting", "${!isPresent}")
+
+                    if (!isPresent) {
                         remindersViewModel.addingReminder(reminder)
                     }
-                } else if (getReminderListModel.size.toString() < remindersListModel.size.toString()) {
-
-                    for (i in 0 until remindersListModel.size -1) {
-//                        var isRemoved = false
-                        Log.e("i's", i.toString())
-
-                        if (remindersListModel[i].reminderId != getReminderListModel[i].reminderId ) {
-                            Log.e("delete2", getReminderListModel[i].reminderId.toString())
-                            remindersViewModel.deleteReminder(remindersListModel[i].reminderId)
-                            getReminderListAdapter.notifyItemRemoved(i)
-                        }
-//                        for (k in 0 until getReminderListModel.size - 1) {
-//                            Log.e("delete1", remindersListModel[k].reminderId.toString())
-////                        Log.e("delete2", getReminderListModel[i].reminderId.toString())
+//                    for (i in 0 until jsonArray.length()) {
 //
-//                        }
-//                        if (isRemoved) {
-//                        }
+//                    }
+                }
+                else if (jsonArray.length().toString() < remindersListModel.size.toString()) {
+//                    Log.e("i's", remindersListModel.size.toString())
+
+                    for (i in 0 until jsonArray.length()) {
+//                        var isRemoved = false
+//                        Log.e("i's", i.toString())
+                        Log.e("i's", remindersListModel.size.toString())
+
+                        if (remindersListModel.isNotEmpty()) {
+                            if (remindersListModel[i].reminderId != getReminderListModel[i].reminderId ) {
+                                Log.e("delete2", remindersListModel[i].reminderId.toString())
+                                remindersViewModel.deleteReminder(remindersListModel[i].reminderId)
+                                getReminderListAdapter.notifyItemRemoved(i)
+                            }
+                        }
                     }
                 }
 
-//                val jsonArrays = mainJsonOj.optJSONArray("reminders")
-//                Log.e("reminder1", remindersListModel.size.toString())
-//                Log.e("reminder2", jsonArrays!!.length().toString())
+                if (getReminderListModel.size.toString() != getRemindersDBList.size.toString()) {
+                    remindersViewModel.deleteReceivedReminders()
+                    remindersViewModel.addReminder(getReminderListModel)
+                }
 
-//                for (i in 0 until jsonArrays.length()) {
-//                    val jsonObject = jsonArrays.getJSONObject(i)
-//                    val remindersIds = jsonObject.getString("id")
-//
-//                    if (getReminderListModel[i].reminderId.toString() != remindersIds) {
-//                        remindersViewModel.addReminder(getReminderListModel)
-//                    }
-//                    Log.e("getid", remindersIds)
-//                    Log.e("reminderIds", getReminderListModel[i].reminderId.toString())
-////                    Log.e("reminder", remindersListModel[i].reminderId.toString())
-//
-//                }
-
-//                for (j in 0 until getReminderListModel.size) {
-////                    Log.e("reminderId", friendReminderId)
-//                    if (friendReminderId != getReminderListModel[j].reminderId.toString()) {
-//                        remindersViewModel.addReminder(getReminderListModel)
-//                    }
-//                    Log.e("reminderId", getReminderListModel[j].reminderId.toString())
-//
-//                }
-
-//                val model : FriendsRemindersListModel
-//
-//                Log.e("listmf", getReminderListModel.size.toString())
-//                val bundle : Bundle? = this.arguments
-//
-//                if (getReminderListModel.size.toString() != getRemindersDBList.size.toString()) {
-//                    remindersViewModel.deleteReceivedReminders()
-//                    remindersViewModel.addReminder(getReminderListModel)
-//                }
-
-//                model = bundle?.getSerializable("ReminderId") as FriendsRemindersListModel
-//                Log.e("reminderId", model.reminderId.toString())
-//                if (friendReminderId > model.reminderId.toString()) {
-
-//                if (progressBar != null) {
-//                    progressBar!!.visibility = View.GONE
-//                }
             }
         }
 

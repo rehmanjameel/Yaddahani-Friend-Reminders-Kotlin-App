@@ -3,7 +3,6 @@ package com.example.yaddahani.mainfragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
@@ -12,7 +11,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,10 +18,11 @@ import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker.checkSelfPermission
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.yaddahani.AppGlobals
 import com.example.yaddahani.R
@@ -36,6 +35,8 @@ import pk.codebase.requests.HttpRequest
 import pk.codebase.requests.HttpResponse
 import java.io.File
 import java.util.*
+import java.util.regex.Pattern
+
 
 @RequiresApi(Build.VERSION_CODES.M)
 class RegistrationFragment : Fragment() {
@@ -136,6 +137,19 @@ class RegistrationFragment : Fragment() {
             pickImage()
         }
     }
+    private val requestPermissionLauncher = registerForActivityResult(
+        RequestPermission()) { isGranted: Boolean ->
+        if (isGranted) {
+            // Permission is granted. Continue the action or workflow in your
+            // app.
+        } else {
+            // Explain to the user that the feature is unavailable because the
+            // features requires a permission that the user has denied. At the
+            // same time, respect the user's decision. Don't link to system
+            // settings in an effort to convince the user to change their
+            // decision.
+        }
+    }
 
     //private function to check the image is selected or not
     private val galleryActivityResultLauncher = registerForActivityResult(
@@ -155,27 +169,25 @@ class RegistrationFragment : Fragment() {
                 }
 //                addUserImageView.setImageURI(imageUri)
 
-                showToast("Image Picked From Gallery")
+//                showToast("Image Picked From Gallery")
 
                 Log.e("Imageuri", imageUri.toString())
-            } else {
-                showToast("Cancelled")
             }
-        }
-    )
+//            else {
+//                showToast("Cancelled")
+//            }
+        })
 
     @SuppressLint("WrongConstant")
     private fun pickImage() {
         //Check Version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Check permission is granted or not to pick the image from external storage
-            if (checkSelfPermission(
-                    requireContext(),
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_DENIED
-            ) {
+            if (checkSelfPermission(requireContext(),
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 val permission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                requestPermissions(permission, PERMISSION_CODE)
+                ActivityCompat.requestPermissions(requireActivity(), permission, PERMISSION_CODE)
+
             } else {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
@@ -227,7 +239,7 @@ class RegistrationFragment : Fragment() {
 
         //
         if (userName.isEmpty() && firstName.isEmpty() && lastName.isEmpty() && userEmail.isEmpty() && userPassword.isEmpty()
-            && userDoB.isEmpty() && imageRealPath == "null" && userPhoneNo.isEmpty()) {
+            && userDoB.isEmpty() && userPhoneNo.isEmpty()) {
             registerUserName.error = "User name required"
             registerFirstName.error = "First name required"
             registerLastName.error = "Last name required"
@@ -235,7 +247,6 @@ class RegistrationFragment : Fragment() {
             registerPassword.error = "Password required"
             userDateOfBirth.error = "DoB required"
             userPhone.error = "Phone no. required"
-            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
         } else if (userName.isEmpty()) {
             registerUserName.error = "User name required"
         } else if (firstName.isEmpty()) {
@@ -243,21 +254,36 @@ class RegistrationFragment : Fragment() {
         } else if (lastName.isEmpty()) {
             registerLastName.error = "Last name required"
         } else if (userEmail.isEmpty()) {
-            registerEmail.error = "Email required"
+            registerEmail.error = "Empty field"
         } else if (userPassword.isEmpty()) {
             registerPassword.error = "Password required"
         } else if (userDoB.isEmpty()) {
             userDateOfBirth.error = "DoB required"
         } else if (userPhoneNo.isEmpty()) {
-            userPhone.error = "Phone no. required"
+            userPhone.error = "Phone no. required only digits required"
+        } else if (!isValidMobile(userPhoneNo)) {
+            userPhone.error = "Invalid Number"
+        } else if (!isValidMail(userEmail)) {
+            registerEmail.error = "Invalid email eg. abc12@gmail.com"
         }
-        else if (imageRealPath == "null") {
-            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
-        } else {
+//        else if (imageRealPath == "null") {
+//            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
+//        }
+        else {
             httpPutFunction()
         }
     }
 
+    private fun isValidMail(email: String): Boolean {
+        val EMAIL_STRING = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        return Pattern.compile(EMAIL_STRING).matcher(email).matches()
+    }
+
+    private fun isValidMobile(phone: String): Boolean {
+        val phoneValidation = ("^((\\+92)|(0092))-{0,1}\\d{3}-{0,1}\\d{7}\$|^\\d{11}\$|^\\d{4}-\\d{7}\$")
+        return Pattern.compile(phoneValidation).matcher(phone).matches()
+    }
     // HttpRequest Function
     private fun httpPutFunction() {
         //Get image path
@@ -343,11 +369,11 @@ class RegistrationFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(requireContext(),
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->    //This statement will be executed once the datePicker dialogue displayed
-                Toast.makeText(
-                    requireContext(),
-                    "The Chosen year is $year, the month is $month, and the day is $selectedDayOfMonth",
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    requireContext(),
+//                    "The Chosen year is $year, the month is $month, and the day is $selectedDayOfMonth",
+//                    Toast.LENGTH_LONG
+//                ).show()
                 val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth"
                 userDateOfBirth.setText(selectedDate)
             }, year, month, day

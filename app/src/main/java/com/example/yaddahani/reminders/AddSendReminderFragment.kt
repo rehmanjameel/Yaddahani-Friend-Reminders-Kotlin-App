@@ -180,11 +180,11 @@ class AddSendReminderFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(requireContext(),
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->    //This statement will be executed once the datePicker dialogue displayed
-                Toast.makeText(
-                    requireContext(),
-                    "The Chosen year is $year, the month is $month, and the day is $selectedDayOfMonth",
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    requireContext(),
+//                    "The Chosen year is $year, the month is $month, and the day is $selectedDayOfMonth",
+//                    Toast.LENGTH_LONG
+//                ).show()
                 val selectedDate = "$selectedDayOfMonth-${selectedMonth + 1}-$selectedYear"
                 sendReminderDatePickerETId.setText(selectedDate)
             }, year, month, day

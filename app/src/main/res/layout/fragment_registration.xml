@@ -154,7 +154,7 @@
                             android:textColorHint="#607d8b"
                             android:inputType="phone"
                             android:maxLines="1"
-                            android:maxLength="11"
+                            android:maxLength="12"
                             android:paddingLeft="10dp"
                             android:hint="Phone: 0300XXXXXXX"/>
                     </com.google.android.material.textfield.TextInputLayout>

@@ -50,7 +50,7 @@ class MessagingServiceFirebase : FirebaseMessagingService() {
                 } else if (msg == "Friend Request Accepted" && FriendListFragment.isForeGround) {
                     friendListFragment.addedFriendsList(applicationContext)
                 } else if (msg == "New Reminder") {
-                    friendReminderFragment.getAllFriendsReminders(applicationContext)
+                    friendReminderFragment.getAllFriendsReminders()
                 }
                 Log.d("Notification msg", msg)
                 Log.d("Notification msg", body)

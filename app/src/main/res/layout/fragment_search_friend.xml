@@ -37,13 +37,13 @@
                 android:layout_height="wrap_content"
                 android:hint="Search"
                 android:textColorHint="#bfbfbf"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:singleLine="true"
                 android:imeOptions="actionSearch"
                 android:textCursorDrawable="@drawable/cursor_shape"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/edit_text_shape"
-                android:padding="15dp"/>
+                android:padding="10dp"/>
 
         </LinearLayout>
 

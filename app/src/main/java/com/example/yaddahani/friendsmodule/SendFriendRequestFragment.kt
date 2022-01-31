@@ -41,8 +41,8 @@ class SendFriendRequestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
-        bottomNavigationView.visibility = View.VISIBLE
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
+        bottomNavigationView.visibility = View.GONE
 
         view.sendRequestUserNameId.text = "User Name: ${args.searchUsers.userName}"
         view.sendRequestFirstNameId.text = "First Name: ${args.searchUsers.firstName}"
@@ -70,6 +70,8 @@ class SendFriendRequestFragment : Fragment() {
             Log.e("Search ResponseCode", friendRequestResponse.code.toString())
             if (friendRequestResponse.code == HttpResponse.HTTP_OK) {
                 Toast.makeText(requireContext(), "Request Sent", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack(R.id.action_sendFriendRequestFragment_to_searchFriendFragment, false)
+                findNavController().popBackStack()
             } else if (friendRequestResponse.code in 400 .. 499) {
                 Toast.makeText(requireContext(), "Request already Sent", Toast.LENGTH_SHORT).show()
             }

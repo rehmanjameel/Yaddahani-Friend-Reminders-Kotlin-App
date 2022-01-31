@@ -68,12 +68,18 @@ class LoginFragment : Fragment() {
         val getToken = appGlobals.getValueString("userToken")
         Log.e("Checking", getToken.toString())
 
-        if (getToken != null) {
+        if (appGlobals.isLoggedInOrGetValueBoolean()) {
             val intent = Intent(activity, HomeActivity::class.java)
             startActivity(intent)
             requireActivity().overridePendingTransition(0,0)
             this.activity?.finish()
         }
+//        if (getToken != "") {
+//            val intent = Intent(activity, HomeActivity::class.java)
+//            startActivity(intent)
+//            requireActivity().overridePendingTransition(0,0)
+//            this.activity?.finish()
+//        }
 
         //
         loginButton.setOnClickListener {
@@ -123,6 +129,7 @@ class LoginFragment : Fragment() {
                 startActivity(intent)
                 requireActivity().overridePendingTransition(0,0)
                 this.activity?.finish()
+                appGlobals.saveLoginOrBoolean(true)
                 progressBar!!.visibility = View.GONE
                 Log.e("Login Response", loginResponse.code.toString())
 

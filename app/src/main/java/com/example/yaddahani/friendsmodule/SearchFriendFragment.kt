@@ -53,7 +53,7 @@ class SearchFriendFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.GONE
 
         backArrow = view.findViewById(R.id.searchBackArrowId)
@@ -122,7 +122,7 @@ class SearchFriendFragment : Fragment() {
                     val searchedLastName = jsonObject.getString("last_name")
 
                     searchingModel.add(SearchUserModel(searchedUserName.toString(), searchedImage, searchedFirstName, searchedLastName))
-                    searchingUserAdapter = SearchingUserAdapter(activity!!, searchingModel)
+                    searchingUserAdapter = SearchingUserAdapter(requireActivity(), searchingModel)
                     recyclerView.adapter = searchingUserAdapter
                     recyclerView.adapter!!.notifyDataSetChanged()
 
@@ -167,7 +167,7 @@ class SearchFriendFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
 
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.VISIBLE
     }
 }
