@@ -1,6 +1,7 @@
 package com.example.yaddahani.mainfragments
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import com.example.yaddahani.AppGlobals
 import com.example.yaddahani.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_email_verification.view.*
 import org.json.JSONObject
@@ -113,36 +115,51 @@ class EmailVerificationFragment : Fragment() {
     //Verify Account
     private fun verifyEmail() {
 
-        httpRequest.setOnResponseListener { otpVerifyResponse ->
+        if (otpVerifyEditText.text.toString().isEmpty()) {
+            otpVerifyEditText.error = "Enter the Otp"
+        } else {
+            httpRequest.setOnResponseListener { otpVerifyResponse ->
 
-            Log.e("verify Code", otpVerifyResponse.code.toString())
-            Log.e("verify Text", otpVerifyResponse.text.toString())
+                Log.e("verify Code", otpVerifyResponse.code.toString())
+                Log.e("verify Text", otpVerifyResponse.text.toString())
 
-            if (otpVerifyResponse.code == HttpResponse.HTTP_OK) {
-                Toast.makeText(requireContext(), "Account Verified", Toast.LENGTH_SHORT).show()
-                startCountDownTimer()
-                countDownTimer.cancel()
-                Log.e("timer", "$countDownTimer")
+                if (otpVerifyResponse.code == HttpResponse.HTTP_OK) {
+                    Toast.makeText(requireContext(), "Account Verified", Toast.LENGTH_SHORT).show()
+                    startCountDownTimer()
+                    countDownTimer.cancel()
+                    Log.e("timer", "$countDownTimer")
 
-                val fragmentManager = parentFragmentManager
-                fragmentManager.popBackStack()
-                fragmentManager.beginTransaction().replace(R.id.fragment, LoginFragment())
-                    .addToBackStack(null).commit()
+                    val fragmentManager = parentFragmentManager
+                    fragmentManager.popBackStack()
+                    fragmentManager.beginTransaction().replace(R.id.fragment, LoginFragment())
+                        .addToBackStack(null).commit()
 //                findNavController().popBackStack()
+                } else if(otpVerifyResponse.code != HttpResponse.HTTP_OK) {
+                    val builder = MaterialAlertDialogBuilder(requireContext())
+                    builder.setPositiveButton("Ok") {_, _ ->
+                        builder.create().dismiss()
+                    }
+                    builder.setTitle("OTP Error")
+                    builder.setMessage(otpVerifyResponse.text)
+                    builder.setCancelable(false)
+                    builder.create().show()
+//                    Toast.makeText(requireContext(), otpVerifyResponse.text, Toast.LENGTH_SHORT).show()
+                }
             }
-        }
-        httpRequest.setOnErrorListener {
-            Log.e("Response Error", "$it")
+            httpRequest.setOnErrorListener {
+                Log.e("Response Error", "$it")
+            }
+
+            val jsonObject = JSONObject()
+            try {
+                jsonObject.put("email", email)
+                jsonObject.put("otp", otpVerifyEditText.text.toString().trim())
+            } catch (e: Exception) {
+                Log.e("JSonException", "$e")
+            }
+            httpRequest.post(AppGlobals.ACTIVATE_ACCOUNT_API, jsonObject)
         }
 
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("email", email)
-            jsonObject.put("otp", otpVerifyEditText.text.toString())
-        } catch (e: Exception) {
-            Log.e("JSonException", "$e")
-        }
-        httpRequest.post(AppGlobals.ACTIVATE_ACCOUNT_API, jsonObject)
     }
 
     //Resend OTP function

@@ -88,6 +88,7 @@ class LoginFragment : Fragment() {
         }
 
         registerText.setOnClickListener {
+            progressBar!!.visibility = View.VISIBLE
             val fragmentManager = parentFragmentManager
             fragmentManager.popBackStack()
             fragmentManager.beginTransaction().replace(R.id.fragment, RegistrationFragment())
@@ -97,8 +98,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginUser() {
-        val userName = userNameEditText.text.toString()
-        val userPassword = userPasswordEditText.text.toString()
+        val userName = userNameEditText.text.toString().trim()
+        val userPassword = userPasswordEditText.text.toString().trim()
         if (userName.isEmpty() && userPassword.isEmpty()) {
             userNameEditText.error = "User Name required"
             userPasswordEditText.error = "User password required"
@@ -159,8 +160,8 @@ class LoginFragment : Fragment() {
         }
 
         try {
-            jsonObject.put("username", userNameEditText.text.toString())
-            jsonObject.put("password", userPasswordEditText.text.toString())
+            jsonObject.put("username", userNameEditText.text.toString().trim())
+            jsonObject.put("password", userPasswordEditText.text.toString().trim())
         } catch (e: Exception) {
             Log.e("Login Response", e.toString())
         }

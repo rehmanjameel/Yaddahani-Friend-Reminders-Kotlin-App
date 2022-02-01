@@ -46,7 +46,6 @@ class RegistrationFragment : Fragment() {
     private lateinit var backArrowImageView: ImageView
     private lateinit var registrationButton: Button
     private lateinit var addUserImageView: CircleImageView
-
     private lateinit var registerUserName: TextInputEditText
     private lateinit var registerFirstName: TextInputEditText
     private lateinit var registerLastName: TextInputEditText
@@ -56,18 +55,17 @@ class RegistrationFragment : Fragment() {
     private lateinit var userPhone: TextInputEditText
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButtons: RadioButton
-    private var progressBar: ProgressBar? = null
-
-    private val appGlobals = AppGlobals()
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-
-    var imageUri: Uri? = null
     private lateinit var realPathUtil: RealPathUtils
 
+    private var progressBar: ProgressBar? = null
+    private val appGlobals = AppGlobals()
     private var imageRealPath: String = ""
     private var radioButtonText = ""
     private val httpRequest = HttpRequest()
+
+    var imageUri: Uri? = null
 
     companion object {
         val PERMISSION_CODE = 1001
@@ -76,12 +74,16 @@ class RegistrationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        Log.e("Screen", "time taking")
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_registration, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e("Screen1", "time taking")
+
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val fragmentManager = parentFragmentManager
@@ -95,6 +97,7 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.e("Screen2", "time taking")
         loginText = view.findViewById(R.id.moveOnLoginPageId)
 
         progressBar = view.registerProgress_Bar
@@ -119,11 +122,10 @@ class RegistrationFragment : Fragment() {
 //            fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
 //                .addToBackStack(null).commit()
 //        }
-        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
+        sharedPreferences = this.requireActivity()
+            .getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
         registrationButton.setOnClickListener {
             registerUser()
-//            findNavController().navigate(R.id.action_registrationFragment_to_emailVerificationFragment)
-
         }
 
         loginText.setOnClickListener {
@@ -189,8 +191,11 @@ class RegistrationFragment : Fragment() {
         //Check Version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Check permission is granted or not to pick the image from external storage
-            if (checkSelfPermission(requireContext(),
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            if (checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_DENIED
+            ) {
                 val permission = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 ActivityCompat.requestPermissions(requireActivity(), permission, PERMISSION_CODE)
 
@@ -245,7 +250,8 @@ class RegistrationFragment : Fragment() {
 
         //
         if (userName.isEmpty() && firstName.isEmpty() && lastName.isEmpty() && userEmail.isEmpty() && userPassword.isEmpty()
-            && userDoB.isEmpty() && userPhoneNo.isEmpty()) {
+            && userDoB.isEmpty() && userPhoneNo.isEmpty()
+        ) {
             registerUserName.error = "User name required"
             registerFirstName.error = "First name required"
             registerLastName.error = "Last name required"
@@ -256,10 +262,11 @@ class RegistrationFragment : Fragment() {
         } else if (userName.isEmpty()) {
             registerUserName.error = "User name required"
         } else if (!isValidUserName(userName)) {
-            registerUserName.error = "min 4 characters 1 digit a-zA-Z any alphabet and no white spaces"
+            registerUserName.error =
+                "min 4 characters 1 digit a-zA-Z any alphabet and no white spaces"
         } else if (firstName.isEmpty()) {
             registerFirstName.error = "First name required"
-        } else if(!isValidFirstLastName(firstName)) {
+        } else if (!isValidFirstLastName(firstName)) {
             registerFirstName.error = "min 4 characters a-zA-Z0-9 any alphabet and digits"
         } else if (!isValidFirstLastName(lastName)) {
             registerLastName.error = "min 4 characters a-zA-Z0-9 any alphabet and digits"
@@ -278,7 +285,8 @@ class RegistrationFragment : Fragment() {
         } else if (!isValidMail(userEmail)) {
             registerEmail.error = "Invalid email. hint:abc12@gmail.com"
         } else if (!isValidPasswordFormat(userPassword)) {
-            registerPassword.error = "max length 6-8 characters 1 digit a-zA-Z any alphabet and no white spaces"
+            registerPassword.error =
+                "max length 6-8 characters 1 digit a-zA-Z any alphabet and no white spaces"
         }
 //        else if (imageRealPath == "null") {
 //            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
@@ -288,6 +296,7 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+
     private fun isValidMail(email: String): Boolean {
         val EMAIL_STRING = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
@@ -295,52 +304,54 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun isValidMobile(phone: String): Boolean {
-        val phoneValidation = ("^((\\+92)|(0092))-{0,1}\\d{3}-{0,1}\\d{7}\$|^\\d{11}\$|^\\d{4}-\\d{7}\$")
+        val phoneValidation =
+            ("^((\\+92)|(0092))-{0,1}\\d{3}-{0,1}\\d{7}\$|^\\d{11}\$|^\\d{4}-\\d{7}\$")
         return Pattern.compile(phoneValidation).matcher(phone).matches()
     }
 
     fun isValidPasswordFormat(password: String): Boolean {
-        val passwordREGEX = Pattern.compile("^" +
-                "(?=.*[0-9])" +         //at least 1 digit
+        val passwordREGEX = Pattern.compile(
+            "^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
 //                "(?=.*[a-z])" +         //at least 1 lower case letter
 //                "(?=.*[A-Z])" +         //at least 1 upper case letter
-                "(?=.*[a-zA-Z])" +      //any letter
-                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                "(?=\\S+$)" +           //no white spaces
-                ".{6,8}" +               //at least 6 characters
-                "$")
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{6,8}" +               //at least 6 characters
+                    "$")
         return passwordREGEX.matcher(password).matches()
     }
 
-    fun isValidUserName(userName: String) : Boolean {
+    fun isValidUserName(userName: String): Boolean {
         val USER_NAME =
             Pattern.compile("^" +
-                    "(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z])" +      //any letter
-                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
-                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 6 characters
-                    "$")
+                        "(?=.*[0-9])" +         //at least 1 digit
+                        //"(?=.*[a-z])" +         //at least 1 lower case letter
+                        //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                        "(?=.*[a-zA-Z])" +      //any letter
+                        //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                        "(?=\\S+$)" +           //no white spaces
+                        ".{4,}" +               //at least 6 characters
+                        "$")
         return USER_NAME.matcher(userName).matches()
     }
 
-    fun isValidFirstLastName(userName: String) : Boolean {
+    fun isValidFirstLastName(userName: String): Boolean {
         val USER_NAME =
             Pattern.compile("^" +
 //                    "(?=.*[0-9])" +         //at least 1 digit
-                    //"(?=.*[a-z])" +         //at least 1 lower case letter
-                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                    "(?=.*[a-zA-Z0-9])" +      //any letter
-                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                        //"(?=.*[a-z])" +         //at least 1 lower case letter
+                        //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                        "(?=.*[a-zA-Z0-9])" +      //any letter
+                        //"(?=.*[@#$%^&+=])" +    //at least 1 special character
 //                    "(?=\\S+$)" +           //no white spaces
-                    ".{4,}" +               //at least 6 characters
-                    "$")
+                        ".{4,}" +               //at least 6 characters
+                        "$")
         return USER_NAME.matcher(userName).matches()
     }
 
-    // HttpRequest Function
+    // HttpRequest Function for Registration
     private fun httpPutFunction() {
         //Get image path
         realPathUtil = RealPathUtils()
@@ -349,7 +360,7 @@ class RegistrationFragment : Fragment() {
         //Get Radio Button functionality
         getRadioButtonText()
         Log.e("Radio Button text", radioButtonText)
-        Log.e("Email",registerEmail.text.toString())
+        Log.e("Email", registerEmail.text.toString())
 
         httpRequest.setOnResponseListener { response ->
             Log.e("Registration Response", response.text)
@@ -360,14 +371,15 @@ class RegistrationFragment : Fragment() {
                 progressBar!!.progress = 100
                 val fragmentManager = parentFragmentManager
                 fragmentManager.popBackStack()
-                fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
+                fragmentManager.beginTransaction()
+                    .replace(R.id.fragment, EmailVerificationFragment())
                     .addToBackStack(null).commit()
 
                 sendOTP()
 //                appGlobals.saveLoginOrBoolean(true)
             } else if (response.code != HttpResponse.HTTP_CREATED) {
                 progressBar!!.visibility = View.GONE
-                showToast(response.reason)
+                showToast(response.text)
             }
         }
 
@@ -379,15 +391,17 @@ class RegistrationFragment : Fragment() {
 
         val formData = FormData()
         try {
-            formData.put("username", registerUserName.text.toString())
-            formData.put("first_name", registerFirstName.text.toString())
-            formData.put("last_name", registerLastName.text.toString())
-            formData.put("email", registerEmail.text.toString())
-            formData.put("date_of_birth", userDateOfBirth.text.toString())
-            formData.put("password", registerPassword.text.toString())
-            formData.put("phone_number", userPhone.text.toString())
+            formData.put("username", registerUserName.text.toString().trim())
+            formData.put("first_name", registerFirstName.text.toString().trim())
+            formData.put("last_name", registerLastName.text.toString().trim())
+            formData.put("email", registerEmail.text.toString().trim())
+            formData.put("date_of_birth", userDateOfBirth.text.toString().trim())
+            formData.put("password", registerPassword.text.toString().trim())
+            formData.put("phone_number", userPhone.text.toString().trim())
             formData.put("gender", radioButtonText)
-            formData.put("image", File(imageRealPath))
+            if (imageUri != null) {
+                formData.put("image", File(imageRealPath))
+            }
         } catch (e: Exception) {
             Log.e("JSonException", "$e")
         }
@@ -422,22 +436,20 @@ class RegistrationFragment : Fragment() {
 
     //Date Picker
     private fun clickDatePicker() {
-        val myCalendar = Calendar.getInstance() //This calendar class allow us to create the calendar objects
+        val myCalendar =
+            Calendar.getInstance() //This calendar class allow us to create the calendar objects
         val year = myCalendar.get(Calendar.YEAR)
         val month = myCalendar.get(Calendar.MONTH)
         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(requireContext(),
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->    //This statement will be executed once the datePicker dialogue displayed
-//                Toast.makeText(
-//                    requireContext(),
-//                    "The Chosen year is $year, the month is $month, and the day is $selectedDayOfMonth",
-//                    Toast.LENGTH_LONG
-//                ).show()
                 val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDayOfMonth"
                 userDateOfBirth.setText(selectedDate)
             }, year, month, day
         )
+        myCalendar.add(Calendar.YEAR, -18)
         datePickerDialog.datePicker.maxDate = myCalendar.timeInMillis
         datePickerDialog.show()
     }
