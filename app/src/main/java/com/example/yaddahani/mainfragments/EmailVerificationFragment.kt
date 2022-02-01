@@ -70,7 +70,7 @@ class EmailVerificationFragment : Fragment() {
         otpVerifyEditText = view.otpVerifyETId
         verificationBackArrow = view.verifyEmailBackArrowId
 
-        sharedPreferences = this.activity!!.getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         email = sharedPreferences.getString("email", "").toString()
         userVerificationEmail.text = email
 

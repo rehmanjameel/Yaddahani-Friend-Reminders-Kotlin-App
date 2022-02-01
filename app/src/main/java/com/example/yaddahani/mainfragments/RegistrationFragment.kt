@@ -29,6 +29,7 @@ import com.example.yaddahani.R
 import com.example.yaddahani.RealPathUtils
 import com.google.android.material.textfield.TextInputEditText
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.fragment_registration.view.*
 import org.json.JSONObject
 import pk.codebase.requests.FormData
 import pk.codebase.requests.HttpRequest
@@ -55,7 +56,9 @@ class RegistrationFragment : Fragment() {
     private lateinit var userPhone: TextInputEditText
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButtons: RadioButton
+    private var progressBar: ProgressBar? = null
 
+    private val appGlobals = AppGlobals()
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
@@ -94,6 +97,8 @@ class RegistrationFragment : Fragment() {
 
         loginText = view.findViewById(R.id.moveOnLoginPageId)
 
+        progressBar = view.registerProgress_Bar
+
         //Initializing the all registrations fields
         backArrowImageView = view.findViewById(R.id.registrationBackArrowId)
         registrationButton = view.findViewById(R.id.registerUserButtonId)
@@ -108,6 +113,12 @@ class RegistrationFragment : Fragment() {
         registerPassword = view.findViewById(R.id.userPasswordETId)
         radioGroup = view.findViewById(R.id.radioGroupId)
 
+//        if (appGlobals.isLoggedInOrGetValueBoolean()) {
+//            val fragmentManager = parentFragmentManager
+//            fragmentManager.popBackStack()
+//            fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
+//                .addToBackStack(null).commit()
+//        }
         sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
         registrationButton.setOnClickListener {
             registerUser()
@@ -137,19 +148,19 @@ class RegistrationFragment : Fragment() {
             pickImage()
         }
     }
-    private val requestPermissionLauncher = registerForActivityResult(
-        RequestPermission()) { isGranted: Boolean ->
-        if (isGranted) {
-            // Permission is granted. Continue the action or workflow in your
-            // app.
-        } else {
-            // Explain to the user that the feature is unavailable because the
-            // features requires a permission that the user has denied. At the
-            // same time, respect the user's decision. Don't link to system
-            // settings in an effort to convince the user to change their
-            // decision.
-        }
-    }
+//    private val requestPermissionLauncher = registerForActivityResult(
+//        RequestPermission()) { isGranted: Boolean ->
+//        if (isGranted) {
+//            // Permission is granted. Continue the action or workflow in your
+//            // app.
+//        } else {
+//            // Explain to the user that the feature is unavailable because the
+//            // features requires a permission that the user has denied. At the
+//            // same time, respect the user's decision. Don't link to system
+//            // settings in an effort to convince the user to change their
+//            // decision.
+//        }
+//    }
 
     //private function to check the image is selected or not
     private val galleryActivityResultLauncher = registerForActivityResult(
@@ -169,13 +180,8 @@ class RegistrationFragment : Fragment() {
                 }
 //                addUserImageView.setImageURI(imageUri)
 
-//                showToast("Image Picked From Gallery")
-
                 Log.e("Imageuri", imageUri.toString())
             }
-//            else {
-//                showToast("Cancelled")
-//            }
         })
 
     @SuppressLint("WrongConstant")
@@ -249,8 +255,14 @@ class RegistrationFragment : Fragment() {
             userPhone.error = "Phone no. required"
         } else if (userName.isEmpty()) {
             registerUserName.error = "User name required"
+        } else if (!isValidUserName(userName)) {
+            registerUserName.error = "min 4 characters 1 digit a-zA-Z any alphabet and no white spaces"
         } else if (firstName.isEmpty()) {
             registerFirstName.error = "First name required"
+        } else if(!isValidFirstLastName(firstName)) {
+            registerFirstName.error = "min 4 characters a-zA-Z0-9 any alphabet and digits"
+        } else if (!isValidFirstLastName(lastName)) {
+            registerLastName.error = "min 4 characters a-zA-Z0-9 any alphabet and digits"
         } else if (lastName.isEmpty()) {
             registerLastName.error = "Last name required"
         } else if (userEmail.isEmpty()) {
@@ -264,7 +276,9 @@ class RegistrationFragment : Fragment() {
         } else if (!isValidMobile(userPhoneNo)) {
             userPhone.error = "Invalid Number"
         } else if (!isValidMail(userEmail)) {
-            registerEmail.error = "Invalid email eg. abc12@gmail.com"
+            registerEmail.error = "Invalid email. hint:abc12@gmail.com"
+        } else if (!isValidPasswordFormat(userPassword)) {
+            registerPassword.error = "max length 6-8 characters 1 digit a-zA-Z any alphabet and no white spaces"
         }
 //        else if (imageRealPath == "null") {
 //            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
@@ -284,6 +298,48 @@ class RegistrationFragment : Fragment() {
         val phoneValidation = ("^((\\+92)|(0092))-{0,1}\\d{3}-{0,1}\\d{7}\$|^\\d{11}\$|^\\d{4}-\\d{7}\$")
         return Pattern.compile(phoneValidation).matcher(phone).matches()
     }
+
+    fun isValidPasswordFormat(password: String): Boolean {
+        val passwordREGEX = Pattern.compile("^" +
+                "(?=.*[0-9])" +         //at least 1 digit
+//                "(?=.*[a-z])" +         //at least 1 lower case letter
+//                "(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{6,8}" +               //at least 6 characters
+                "$")
+        return passwordREGEX.matcher(password).matches()
+    }
+
+    fun isValidUserName(userName: String) : Boolean {
+        val USER_NAME =
+            Pattern.compile("^" +
+                    "(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 6 characters
+                    "$")
+        return USER_NAME.matcher(userName).matches()
+    }
+
+    fun isValidFirstLastName(userName: String) : Boolean {
+        val USER_NAME =
+            Pattern.compile("^" +
+//                    "(?=.*[0-9])" +         //at least 1 digit
+                    //"(?=.*[a-z])" +         //at least 1 lower case letter
+                    //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z0-9])" +      //any letter
+                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+//                    "(?=\\S+$)" +           //no white spaces
+                    ".{4,}" +               //at least 6 characters
+                    "$")
+        return USER_NAME.matcher(userName).matches()
+    }
+
     // HttpRequest Function
     private fun httpPutFunction() {
         //Get image path
@@ -300,21 +356,25 @@ class RegistrationFragment : Fragment() {
 
             if (response.code == HttpResponse.HTTP_CREATED) {
                 Log.e("Registration Response", "${response.code}")
-
-//                findNavController().navigate(R.id.action_registrationFragment_to_emailVerificationFragment)
+                progressBar!!.visibility = View.VISIBLE
+                progressBar!!.progress = 100
                 val fragmentManager = parentFragmentManager
                 fragmentManager.popBackStack()
                 fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
                     .addToBackStack(null).commit()
 
-                Toast.makeText(requireContext(), "Data sent", Toast.LENGTH_SHORT).show()
                 sendOTP()
+//                appGlobals.saveLoginOrBoolean(true)
+            } else if (response.code != HttpResponse.HTTP_CREATED) {
+                progressBar!!.visibility = View.GONE
+                showToast(response.reason)
             }
         }
 
         httpRequest.setOnErrorListener {
-//            Log.e("Registration Error", response.reason)
+            progressBar!!.visibility = View.GONE
             Log.e("Response Error", it.reason)
+            showToast(it.reason)
         }
 
         val formData = FormData()

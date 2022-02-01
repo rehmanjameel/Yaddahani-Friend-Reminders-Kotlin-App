@@ -1,5 +1,6 @@
 package com.example.yaddahani.adapters
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
 import android.util.Log
@@ -43,6 +44,7 @@ class SentRemindersAdapter(activity: Activity, private val sentReminderModel : A
         return SentViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: SentViewHolder, position: Int) {
         val sentModelData = sentReminderModel[position]
 
@@ -89,6 +91,8 @@ class SentRemindersAdapter(activity: Activity, private val sentReminderModel : A
                     if (statusResponse.code == HttpResponse.HTTP_OK) {
                         println("$ Ok Response")
                         holder.itemView.sentReminderStatusId.text = "Reminded"
+                        holder.itemView.updateSentReminderIcon.isClickable = false
+                        holder.itemView.updateSentReminderIcon.backgroundTintList = sentReminderActivity.getColorStateList(R.color.offWhite1)
 
                     }
                 }

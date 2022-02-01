@@ -91,7 +91,8 @@ class LoginFragment : Fragment() {
             val fragmentManager = parentFragmentManager
             fragmentManager.popBackStack()
             fragmentManager.beginTransaction().replace(R.id.fragment, RegistrationFragment())
-                .addToBackStack("First").commit()        }
+                .addToBackStack("First").commit()
+        }
 
     }
 
@@ -147,13 +148,14 @@ class LoginFragment : Fragment() {
 
             } else if (loginResponse.code != HttpResponse.HTTP_OK) {
                 progressBar!!.visibility = View.GONE
+                Toast.makeText(requireContext(), loginResponse.reason, Toast.LENGTH_SHORT).show()
             }
         }
 
         httpLoginRequest.setOnErrorListener {
+            progressBar!!.visibility = View.GONE
             Toast.makeText(requireContext(), it.reason, Toast.LENGTH_SHORT).show()
             Log.e("Login Response", it.reason)
-            progressBar!!.visibility = View.GONE
         }
 
         try {

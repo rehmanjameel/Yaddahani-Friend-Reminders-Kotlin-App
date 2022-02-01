@@ -75,7 +75,7 @@ class SendReminderToFriendFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.GONE
 
         progressBar = view.sentReminderProgress_Bar
@@ -120,26 +120,36 @@ class SendReminderToFriendFragment : Fragment() {
         popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.unFriendMenuId -> {
-                    httpRequest.setOnResponseListener { unFriendResponse ->
-                        if (unFriendResponse.code == HttpResponse.HTTP_OK) {
-                            friendListFragment.addedFriendsList(context)
-                            findNavController().popBackStack(R.id.action_reminderFriendFragment_to_friendListFragmentId, false)
-                            findNavController().popBackStack()
-                            Log.e("Response Unfriend", unFriendResponse.code.toString())
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setPositiveButton("Yes") {_, _ ->
+                        httpRequest.setOnResponseListener { unFriendResponse ->
+                            if (unFriendResponse.code == HttpResponse.HTTP_OK) {
+                                friendListFragment.addedFriendsList(context)
+                                findNavController().popBackStack(R.id.action_reminderFriendFragment_to_friendListFragmentId, false)
+                                findNavController().popBackStack()
+                                Log.e("Response Unfriend", unFriendResponse.code.toString())
+                            }
                         }
-                    }
-                    httpRequest.setOnErrorListener {
-                        Log.e("UnfriendError", "$it")
-                    }
+                        httpRequest.setOnErrorListener {
+                            Log.e("UnfriendError", "$it")
+                        }
 
-                    try {
-                        jsonObject.put("username", reminderArgs.friendsList.userName)
-                    } catch (e: Exception) {
+                        try {
+                            jsonObject.put("username", reminderArgs.friendsList.userName)
+                        } catch (e: Exception) {
 
+                        }
+                        val token = appGlobals.getValueString("userToken")
+                        val headers = HttpHeaders("Authorization", "Token $token")
+                        httpRequest.delete(AppGlobals.DELETE_FRIEND_API, jsonObject, headers)
                     }
-                    val token = appGlobals.getValueString("userToken")
-                    val headers = HttpHeaders("Authorization", "Token $token")
-                    httpRequest.delete(AppGlobals.DELETE_FRIEND_API, jsonObject, headers)
+                    builder.setNegativeButton("No") {_, _ ->
+                        builder.create().dismiss()
+                    }
+                    builder.setCancelable(true)
+                    builder.setTitle("Unfriend person")
+                    builder.setMessage("Are you sure? Do you want to remove the ${reminderArgs.friendsList.userName}?")
+                    builder.create().show()
                 }
             }
             true
@@ -176,7 +186,7 @@ class SendReminderToFriendFragment : Fragment() {
                             sentFriendReminderDate, sentFriendReminderFromName, sentFriendReminderToName, sentFriendReminderStatus))
 
                         sentReminderModelArray.reverse()
-                        sentReminderAdapter = SentRemindersAdapter(activity!!, sentReminderModelArray)
+                        sentReminderAdapter = SentRemindersAdapter(requireActivity(), sentReminderModelArray)
                         recyclerView.adapter = sentReminderAdapter
                     }
                 }
@@ -204,11 +214,11 @@ class SendReminderToFriendFragment : Fragment() {
 
             sentReminderArray.removeAt(position)
             adapter.notifyDataSetChanged()
-            Toast.makeText(
-                activity,
-                "${reminder.sentReminderFrom} ${reminder.sentReminderText} Successfully deleted",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                activity,
+//                "${reminder.sentReminderFrom} ${reminder.sentReminderText} Successfully deleted",
+//                Toast.LENGTH_SHORT
+//            ).show()
         }
         builder.setNegativeButton("No") { _, _ ->
         }
@@ -367,7 +377,7 @@ class SendReminderToFriendFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.VISIBLE
     }
 
