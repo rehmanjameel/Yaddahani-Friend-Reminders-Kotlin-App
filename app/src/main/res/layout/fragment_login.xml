@@ -24,10 +24,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
                 android:textColorHint="#607d8b"
                 android:paddingLeft="10dp"
                 android:maxLines="1"
-                android:hint="User Name"/>
+                android:hint="User Name"
+                android:focusable="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +48,10 @@
                 android:textColorHint="#607d8b"
                 android:paddingLeft="10dp"
                 android:maxLines="1"
-                android:hint="Password"/>
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:hint="Password"
+                android:focusable="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

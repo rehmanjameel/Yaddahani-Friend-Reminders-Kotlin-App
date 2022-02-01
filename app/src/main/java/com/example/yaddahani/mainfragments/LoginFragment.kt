@@ -1,21 +1,19 @@
 package com.example.yaddahani.mainfragments
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
 import com.example.yaddahani.AppGlobals
 import com.example.yaddahani.R
 import com.example.yaddahani.friendsmodule.HomeActivity
@@ -24,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 import org.json.JSONObject
 import pk.codebase.requests.HttpRequest
 import pk.codebase.requests.HttpResponse
-import java.lang.Exception
+
 
 @RequiresApi(Build.VERSION_CODES.M)
 class LoginFragment : Fragment() {
@@ -52,6 +50,7 @@ class LoginFragment : Fragment() {
             }
         })
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -95,6 +94,40 @@ class LoginFragment : Fragment() {
                 .addToBackStack("First").commit()
         }
 
+        setupUI(view)
+
+    }
+
+    fun hideSoftKeyboard(activity: Activity) {
+        val inputMethodManager: InputMethodManager = activity.getSystemService(
+            Activity.INPUT_METHOD_SERVICE
+        ) as InputMethodManager
+        if (inputMethodManager.isAcceptingText) {
+            inputMethodManager.hideSoftInputFromWindow(
+                activity.currentFocus!!.windowToken,
+                0
+            )
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun setupUI(view: View) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (view !is TextInputEditText) {
+            view.setOnTouchListener { v, event ->
+                hideSoftKeyboard(requireActivity())
+                false
+            }
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view is ViewGroup) {
+            for (i in 0 until view.childCount) {
+                val innerView = view.getChildAt(i)
+                setupUI(innerView)
+            }
+        }
     }
 
     private fun loginUser() {

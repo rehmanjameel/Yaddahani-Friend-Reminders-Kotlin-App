@@ -1,0 +1,67 @@
+com/example/yaddahani/roomDB/ReminderDao_Impl.java
+ com.example.yaddahani.roomDB.ReminderDao_Impl
+ com.example.yaddahani.roomDB.ReminderDao_Impl$1
+ com.example.yaddahani.roomDB.ReminderDao_Impl$10
+ com.example.yaddahani.roomDB.ReminderDao_Impl$11
+ com.example.yaddahani.roomDB.ReminderDao_Impl$12
+ com.example.yaddahani.roomDB.ReminderDao_Impl$2
+ com.example.yaddahani.roomDB.ReminderDao_Impl$3
+ com.example.yaddahani.roomDB.ReminderDao_Impl$4
+ com.example.yaddahani.roomDB.ReminderDao_Impl$5
+ com.example.yaddahani.roomDB.ReminderDao_Impl$6
+ com.example.yaddahani.roomDB.ReminderDao_Impl$7
+ com.example.yaddahani.roomDB.ReminderDao_Impl$8
+ com.example.yaddahani.roomDB.ReminderDao_Impl$9
+com/example/yaddahani/roomDB/ReminderDataBase_Impl.java
+ com.example.yaddahani.roomDB.ReminderDataBase_Impl
+ com.example.yaddahani.roomDB.ReminderDataBase_Impl$1
+com/example/yaddahani/BuildConfig.java
+ com.example.yaddahani.BuildConfig
+com/example/yaddahani/databinding/FragmentRegistrationBinding.java
+ com.example.yaddahani.databinding.FragmentRegistrationBinding
+com/example/yaddahani/databinding/FragmentFriendReminderBinding.java
+ com.example.yaddahani.databinding.FragmentFriendReminderBinding
+com/example/yaddahani/databinding/FragmentSearchFriendBinding.java
+ com.example.yaddahani.databinding.FragmentSearchFriendBinding
+com/example/yaddahani/databinding/FriendsListBinding.java
+ com.example.yaddahani.databinding.FriendsListBinding
+com/example/yaddahani/databinding/FragmentProfileBinding.java
+ com.example.yaddahani.databinding.FragmentProfileBinding
+com/example/yaddahani/databinding/ArchivedRemindersLayoutBinding.java
+ com.example.yaddahani.databinding.ArchivedRemindersLayoutBinding
+com/example/yaddahani/databinding/FragmentSendFriendRequestBinding.java
+ com.example.yaddahani.databinding.FragmentSendFriendRequestBinding
+com/example/yaddahani/databinding/FragmentUpdateUserBinding.java
+ com.example.yaddahani.databinding.FragmentUpdateUserBinding
+com/example/yaddahani/databinding/FragmentSendReminderFriendBinding.java
+ com.example.yaddahani.databinding.FragmentSendReminderFriendBinding
+com/example/yaddahani/databinding/ActivityHomeBinding.java
+ com.example.yaddahani.databinding.ActivityHomeBinding
+com/example/yaddahani/databinding/FragmentFriendListBinding.java
+ com.example.yaddahani.databinding.FragmentFriendListBinding
+com/example/yaddahani/databinding/FriendPendingRequestListBinding.java
+ com.example.yaddahani.databinding.FriendPendingRequestListBinding
+com/example/yaddahani/databinding/FragmentAddSendReminderBinding.java
+ com.example.yaddahani.databinding.FragmentAddSendReminderBinding
+com/example/yaddahani/databinding/UpdateReminderBinding.java
+ com.example.yaddahani.databinding.UpdateReminderBinding
+com/example/yaddahani/databinding/FragmentShowSentRemindersBinding.java
+ com.example.yaddahani.databinding.FragmentShowSentRemindersBinding
+com/example/yaddahani/databinding/SentRemindersLayoutBinding.java
+ com.example.yaddahani.databinding.SentRemindersLayoutBinding
+com/example/yaddahani/databinding/SearchingUsersBinding.java
+ com.example.yaddahani.databinding.SearchingUsersBinding
+com/example/yaddahani/databinding/FragmentShowReceivedRemindersBinding.java
+ com.example.yaddahani.databinding.FragmentShowReceivedRemindersBinding
+com/example/yaddahani/databinding/ReminderTextLayoutBinding.java
+ com.example.yaddahani.databinding.ReminderTextLayoutBinding
+com/example/yaddahani/databinding/FragmentLoginBinding.java
+ com.example.yaddahani.databinding.FragmentLoginBinding
+com/example/yaddahani/databinding/ActivityMainBinding.java
+ com.example.yaddahani.databinding.ActivityMainBinding
+com/example/yaddahani/databinding/FragmentEmailVerificationBinding.java
+ com.example.yaddahani.databinding.FragmentEmailVerificationBinding
+com/example/yaddahani/databinding/FriendsRemindersLayoutBinding.java
+ com.example.yaddahani.databinding.FriendsRemindersLayoutBinding
+com/example/yaddahani/databinding/ProgressLayoutBinding.java
+ com.example.yaddahani.databinding.ProgressLayoutBinding

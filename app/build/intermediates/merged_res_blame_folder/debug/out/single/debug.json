@@ -1,0 +1,310 @@
+[
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_friend_list.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_friend_list.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/menu_delete_account_menu.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/menu/delete_account_menu.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_profile.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_profile.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_login.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_login.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_edit_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_edit_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/menu_friends_menu.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/menu/friends_menu.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_add_icon.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/add_icon.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_add_send_reminder.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_add_send_reminder.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_pending_actions.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_pending_actions.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_arrow_up_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/arrow_up_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_profile.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/profile.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_archive_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/archive_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_unarchive_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/unarchive_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_persons.png.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/persons.png"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_edit_text.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/edit_text.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_activity_main.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_sent_reminders_layout.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/sent_reminders_layout.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_arrow_back.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/arrow_back.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_friends.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_friends.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_progress_layout.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/progress_layout.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/menu_unfriend_menu.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/menu/unfriend_menu.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_cursor_shape.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/cursor_shape.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_send_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_send_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_update_reminder.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/update_reminder.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_show_received_reminders.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_show_received_reminders.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_friend_pending_request_list.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/friend_pending_request_list.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_friends_reminders_layout.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/friends_reminders_layout.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/menu_delete_reminder_menu.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/menu/delete_reminder_menu.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_archived_reminders_layout.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/archived_reminders_layout.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/generated/res/pngs/debug/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_arrow_down_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/arrow_down_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_email_verification_layout.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/email_verification_layout.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_cancel_button_border.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/cancel_button_border.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_progress_bar_style.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/progress_bar_style.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_access_alarm_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_access_alarm_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_friend_reminder.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_friend_reminder.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/menu_action_bar_menu.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/menu/action_bar_menu.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_delete_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_delete_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_send_reminder_friend.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_send_reminder_friend.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_activity_home.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/activity_home.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_update_user.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_update_user.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/navigation_home_nav_graph.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/navigation/home_nav_graph.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_add_task_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_add_task_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_back_arrow.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/back_arrow.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_show_sent_reminders.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_show_sent_reminders.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_person_add_alt_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/person_add_alt_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_circle_notifications_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/circle_notifications_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_registration.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_registration.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_search_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_search_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_more_vert_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_more_vert_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_send_friend_request.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_send_friend_request.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_reminder_text_layout.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/reminder_text_layout.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_edit_note_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/edit_note_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_edit_text_shape.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/edit_text_shape.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_email_verification.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_email_verification.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_friends_list.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/friends_list.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_warning_amber_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/warning_amber_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_launcher_background.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_fragments_layout_background.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/fragments_layout_background.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_ic_baseline_arrow_back_24.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_layout_background.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/layout_background.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/drawable_round_send_button.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/drawable/round_send_button.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_fragment_search_friend.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/fragment_search_friend.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/layout_searching_users.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/layout/searching_users.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/navigation_nav_graph.xml.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/navigation/nav_graph.xml"
+    },
+    {
+        "merged": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/build/intermediates/merged_res/debug/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/home/arehman/Yaddahani-Friend-Reminders-Kotlin-App/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp"
+    }
+]

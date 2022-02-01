@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">928273635306-b0plnb8r5se32l4juiu88e5sncab22vr.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">928273635306</string>
+    <string name="google_api_key" translatable="false">AIzaSyDzDifiJxCvyipMhNKr9ebscbq3ZaSD5io</string>
+    <string name="google_app_id" translatable="false">1:928273635306:android:692c99bd8a8b4d272e0493</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDzDifiJxCvyipMhNKr9ebscbq3ZaSD5io</string>
+    <string name="google_storage_bucket" translatable="false">yaad-dahani.appspot.com</string>
+    <string name="project_id" translatable="false">yaad-dahani</string>
+</resources>
