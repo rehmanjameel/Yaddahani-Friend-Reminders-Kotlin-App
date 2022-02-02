@@ -1,11 +1,11 @@
 [
   {
-    "name": "nav_graph",
+    "name": "home_nav_graph",
     "navigationXmlIds": [],
     "deepLinks": []
   },
   {
-    "name": "home_nav_graph",
+    "name": "nav_graph",
     "navigationXmlIds": [],
     "deepLinks": []
   }

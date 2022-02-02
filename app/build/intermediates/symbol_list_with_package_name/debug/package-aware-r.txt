@@ -2599,6 +2599,7 @@ drawable person_add_alt_24
 drawable persons
 drawable profile
 drawable progress_bar_style
+drawable reminder_add_24
 drawable round_send_button
 drawable test_custom_background
 drawable test_level_drawable

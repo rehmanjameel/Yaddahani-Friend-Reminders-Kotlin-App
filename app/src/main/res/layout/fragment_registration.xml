@@ -69,15 +69,14 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userNameETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#607d8b"
                         app:boxBackgroundColor="#e6e6e6"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/userNameETId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName"
@@ -88,15 +87,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/firstNameETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#607d8b"
                         app:boxBackgroundColor="#e6e6e6"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/firstNameETId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPersonName|textCapWords"
@@ -107,15 +105,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/lastNameETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#607d8b"
                         app:boxBackgroundColor="#e6e6e6"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/lastNameETId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="#607d8b"
@@ -124,6 +121,27 @@
                             android:paddingLeft="10dp"
                             android:hint="Last Name"/>
                     </com.google.android.material.textfield.TextInputLayout>
+
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:boxBackgroundColor="#e6e6e6"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:layout_marginEnd="10dp">-->
+
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:textColorHint="#607d8b"-->
+<!--                            android:inputType="none"-->
+<!--                            android:focusable="true"-->
+<!--                            android:clickable="true"-->
+<!--                            android:focusableInTouchMode="false"-->
+<!--                            android:cursorVisible="false"-->
+<!--                            android:maxLines="1"-->
+<!--                            android:paddingLeft="10dp"-->
+<!--                            android:hint="DoB: 2022-01-04"/>-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                     <EditText
                         android:id="@+id/dobETId"
@@ -140,15 +158,14 @@
                         android:cursorVisible="false"/>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/mobileNoETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#607d8b"
                         app:boxBackgroundColor="#e6e6e6"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/mobileNoETId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="#607d8b"
@@ -160,15 +177,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userEmailETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#607d8b"
                         app:boxBackgroundColor="#e6e6e6"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/userEmailETId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColorHint="#607d8b"
@@ -179,15 +195,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/userPasswordETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxStrokeColor="#607d8b"
                         app:boxBackgroundColor="#e6e6e6"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/userPasswordETId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="1"

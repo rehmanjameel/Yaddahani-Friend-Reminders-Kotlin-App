@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.yaddahani.R;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import de.hdodenhof.circleimageview.CircleImageView;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -37,16 +37,16 @@ public final class FragmentRegistrationBinding implements ViewBinding {
   public final RadioButton femaleRadioButtonId;
 
   @NonNull
-  public final TextInputEditText firstNameETId;
+  public final TextInputLayout firstNameETId;
 
   @NonNull
-  public final TextInputEditText lastNameETId;
+  public final TextInputLayout lastNameETId;
 
   @NonNull
   public final RadioButton maleRadioButtonId;
 
   @NonNull
-  public final TextInputEditText mobileNoETId;
+  public final TextInputLayout mobileNoETId;
 
   @NonNull
   public final TextView moveOnLoginPageId;
@@ -67,23 +67,23 @@ public final class FragmentRegistrationBinding implements ViewBinding {
   public final ImageView registrationBackArrowId;
 
   @NonNull
-  public final TextInputEditText userEmailETId;
+  public final TextInputLayout userEmailETId;
 
   @NonNull
-  public final TextInputEditText userNameETId;
+  public final TextInputLayout userNameETId;
 
   @NonNull
-  public final TextInputEditText userPasswordETId;
+  public final TextInputLayout userPasswordETId;
 
   private FragmentRegistrationBinding(@NonNull RelativeLayout rootView,
       @NonNull CircleImageView addUserImageView, @NonNull EditText dobETId,
-      @NonNull RadioButton femaleRadioButtonId, @NonNull TextInputEditText firstNameETId,
-      @NonNull TextInputEditText lastNameETId, @NonNull RadioButton maleRadioButtonId,
-      @NonNull TextInputEditText mobileNoETId, @NonNull TextView moveOnLoginPageId,
+      @NonNull RadioButton femaleRadioButtonId, @NonNull TextInputLayout firstNameETId,
+      @NonNull TextInputLayout lastNameETId, @NonNull RadioButton maleRadioButtonId,
+      @NonNull TextInputLayout mobileNoETId, @NonNull TextView moveOnLoginPageId,
       @NonNull RadioGroup radioGroupId, @NonNull RadioButton ratherNotSayRadioButtonId,
       @NonNull ProgressBar registerProgressBar, @NonNull Button registerUserButtonId,
-      @NonNull ImageView registrationBackArrowId, @NonNull TextInputEditText userEmailETId,
-      @NonNull TextInputEditText userNameETId, @NonNull TextInputEditText userPasswordETId) {
+      @NonNull ImageView registrationBackArrowId, @NonNull TextInputLayout userEmailETId,
+      @NonNull TextInputLayout userNameETId, @NonNull TextInputLayout userPasswordETId) {
     this.rootView = rootView;
     this.addUserImageView = addUserImageView;
     this.dobETId = dobETId;
@@ -149,13 +149,13 @@ public final class FragmentRegistrationBinding implements ViewBinding {
       }
 
       id = R.id.firstNameETId;
-      TextInputEditText firstNameETId = ViewBindings.findChildViewById(rootView, id);
+      TextInputLayout firstNameETId = ViewBindings.findChildViewById(rootView, id);
       if (firstNameETId == null) {
         break missingId;
       }
 
       id = R.id.lastNameETId;
-      TextInputEditText lastNameETId = ViewBindings.findChildViewById(rootView, id);
+      TextInputLayout lastNameETId = ViewBindings.findChildViewById(rootView, id);
       if (lastNameETId == null) {
         break missingId;
       }
@@ -167,7 +167,7 @@ public final class FragmentRegistrationBinding implements ViewBinding {
       }
 
       id = R.id.mobileNoETId;
-      TextInputEditText mobileNoETId = ViewBindings.findChildViewById(rootView, id);
+      TextInputLayout mobileNoETId = ViewBindings.findChildViewById(rootView, id);
       if (mobileNoETId == null) {
         break missingId;
       }
@@ -209,19 +209,19 @@ public final class FragmentRegistrationBinding implements ViewBinding {
       }
 
       id = R.id.userEmailETId;
-      TextInputEditText userEmailETId = ViewBindings.findChildViewById(rootView, id);
+      TextInputLayout userEmailETId = ViewBindings.findChildViewById(rootView, id);
       if (userEmailETId == null) {
         break missingId;
       }
 
       id = R.id.userNameETId;
-      TextInputEditText userNameETId = ViewBindings.findChildViewById(rootView, id);
+      TextInputLayout userNameETId = ViewBindings.findChildViewById(rootView, id);
       if (userNameETId == null) {
         break missingId;
       }
 
       id = R.id.userPasswordETId;
-      TextInputEditText userPasswordETId = ViewBindings.findChildViewById(rootView, id);
+      TextInputLayout userPasswordETId = ViewBindings.findChildViewById(rootView, id);
       if (userPasswordETId == null) {
         break missingId;
       }

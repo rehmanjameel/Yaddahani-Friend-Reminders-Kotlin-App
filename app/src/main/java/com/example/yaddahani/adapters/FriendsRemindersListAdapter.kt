@@ -98,6 +98,11 @@ class FriendsRemindersListAdapter(context: Context)
         when {
             exactDateTime > dateTimeTo -> {
                 println("$exactDateTime is greater")
+                if (reminderListModelData.reminderStatus == "1") {
+                    holder.itemView.receivedReminderStatusId.text = "Pending"
+                } else {
+                    holder.itemView.receivedReminderStatusId.text = "Reminded"
+                }
             }
             exactDateTime < dateTimeTo -> {
                 println("$exactDateTime is less")

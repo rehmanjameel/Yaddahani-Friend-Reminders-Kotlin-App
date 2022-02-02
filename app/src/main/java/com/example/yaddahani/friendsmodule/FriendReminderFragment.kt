@@ -38,6 +38,14 @@ import org.json.JSONObject
 import pk.codebase.requests.HttpHeaders
 import pk.codebase.requests.HttpRequest
 import pk.codebase.requests.HttpResponse
+import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+
 @RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("NotifyDataSetChanged", "StaticFieldLeak")
 
@@ -77,7 +85,6 @@ class FriendReminderFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_friend_reminder, container, false)
-
 
         // Inflate the layout for this fragment
         return view
@@ -234,22 +241,6 @@ class FriendReminderFragment : Fragment() {
 //                        newJsonArray.put(getReminderListModel.toArray().toString())
 //                        Log.e("listnA", jA.toString())
 
-//                        if (friendReminderDate.toLong() == System.currentTimeMillis()) {
-//                            //Set Alarm
-//                            val alarmManager: AlarmManager = requireActivity().getSystemService(
-//                                AppCompatActivity.ALARM_SERVICE) as AlarmManager
-//                            val alarmIntent = Intent(requireContext(), AlarmReceiver::class.java)
-//                            val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, alarmIntent, 0)
-//
-//                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-//                                Log.e("Alarm", "Alarm")
-//                                alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(friendReminderDate.toLong(), pendingIntent), pendingIntent)
-//                            } else {
-//                                Log.e("Alarm1", "${friendReminderDate.toLong()}")
-//                                alarmManager.set(AlarmManager.RTC_WAKEUP, friendReminderDate.toLong(), pendingIntent)
-//                                Log.e("Alarm2", "Alarm")
-//                            }
-//                        }
                     }
 
                 }
@@ -282,20 +273,56 @@ class FriendReminderFragment : Fragment() {
                     }
                     Log.e("presenting", "${!isPresent}")
 
-                    if (!isPresent) {
+                    if (isPresent) {
                         remindersViewModel.addingReminder(reminder)
+                        //Received date time from server
+                        val dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a")
+//                        val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+//                        val timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a")
+
+                        val instant = Instant.ofEpochMilli(friendReminderDate.toLong())
+                        val date = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+//                        println(dateFormatter.format(date))
+//                        println(timeFormatter.format(date))
+//                        val exactDate = dateFormatter.format(date)
+//                        val exactTime = timeFormatter.format(date)
+                        val exactDateTime = dateTimeFormatter.format(date)
+
+                        //Current date time
+                        val dates = Date()
+                        val stringFormat = SimpleDateFormat("dd-MM-yyyy hh:mm:ss a")
+                        val dateTimeTo = stringFormat.format(dates.time)
+                        Log.d("D", dateTimeTo.toString())
+//Set Alarm
+
+//                        if (exactDateTime > dateTimeTo) {
+//                            val alarmManager: AlarmManager = requireActivity().getSystemService(
+//                                AppCompatActivity.ALARM_SERVICE) as AlarmManager
+//                            val alarmIntent = Intent(requireContext(), AlarmReceiver::class.java)
+//                            val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, alarmIntent, 0)
+//
+//                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+//                                Log.e("Alarm", "Alarm")
+//                                alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(friendReminderDate.toLong(), pendingIntent), pendingIntent)
+//                            } else {
+//                                Log.e("Alarm1", "${friendReminderDate.toLong()}")
+//                                alarmManager.set(AlarmManager.RTC_WAKEUP, friendReminderDate.toLong(), pendingIntent)
+//                                Log.e("Alarm2", "Alarm")
+//                            }
+//                        }
                     }
 //                    for (i in 0 until jsonArray.length()) {
 //
 //                    }
                 }
-                else if (jsonArray.length().toString() < remindersListModel.size.toString()) {
+                else if (getReminderListModel.size.toString() < remindersListModel.size.toString()) {
 //                    Log.e("i's", remindersListModel.size.toString())
 
-                    for (i in 0 until jsonArray.length()) {
+                    for (i in 0 until remindersListModel.size - 1) {
 //                        var isRemoved = false
 //                        Log.e("i's", i.toString())
-                        Log.e("i's", remindersListModel.size.toString())
+                        Log.e("i's", getReminderListModel.size.toString())
+                        Log.e("i'ss", remindersListModel.size.toString())
 
                         if (remindersListModel.isNotEmpty()) {
                             if (remindersListModel[i].reminderId != getReminderListModel[i].reminderId ) {
@@ -307,10 +334,10 @@ class FriendReminderFragment : Fragment() {
                     }
                 }
 
-                if (getReminderListModel.size.toString() != getRemindersDBList.size.toString()) {
-                    remindersViewModel.deleteReceivedReminders()
-                    remindersViewModel.addReminder(getReminderListModel)
-                }
+//                if (getReminderListModel.size.toString() != getRemindersDBList.size.toString()) {
+//                    remindersViewModel.deleteReceivedReminders()
+//                    remindersViewModel.addReminder(getReminderListModel)
+//                }
 
             }
         }

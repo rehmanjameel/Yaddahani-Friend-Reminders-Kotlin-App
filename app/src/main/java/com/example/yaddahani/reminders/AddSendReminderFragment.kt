@@ -50,7 +50,7 @@ class AddSendReminderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.GONE
 
         timeView = view.timeTextView

@@ -27,7 +27,9 @@ import com.bumptech.glide.Glide
 import com.example.yaddahani.AppGlobals
 import com.example.yaddahani.R
 import com.example.yaddahani.RealPathUtils
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import org.json.JSONObject
@@ -46,13 +48,13 @@ class RegistrationFragment : Fragment() {
     private lateinit var backArrowImageView: ImageView
     private lateinit var registrationButton: Button
     private lateinit var addUserImageView: CircleImageView
-    private lateinit var registerUserName: TextInputEditText
-    private lateinit var registerFirstName: TextInputEditText
-    private lateinit var registerLastName: TextInputEditText
-    private lateinit var registerEmail: TextInputEditText
-    private lateinit var registerPassword: TextInputEditText
+    private lateinit var registerUserName: TextInputLayout
+    private lateinit var registerFirstName: TextInputLayout
+    private lateinit var registerLastName: TextInputLayout
+    private lateinit var registerEmail: TextInputLayout
+    private lateinit var registerPassword: TextInputLayout
     private lateinit var userDateOfBirth: EditText
-    private lateinit var userPhone: TextInputEditText
+    private lateinit var userPhone: TextInputLayout
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButtons: RadioButton
     private lateinit var sharedPreferences: SharedPreferences
@@ -234,12 +236,12 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun registerUser() {
-        val userName = registerUserName.text.toString()
-        val firstName = registerFirstName.text.toString()
-        val lastName = registerLastName.text.toString()
-        val userEmail = registerEmail.text.toString()
-        val userPassword = registerPassword.text.toString()
-        val userPhoneNo = userPhone.text.toString()
+        val userName = registerUserName.editText?.text.toString()
+        val firstName = registerFirstName.editText?.text.toString()
+        val lastName = registerLastName.editText?.text.toString()
+        val userEmail = registerEmail.editText?.text.toString()
+        val userPassword = registerPassword.editText?.text.toString()
+        val userPhoneNo = userPhone.editText?.text.toString()
         val userDoB = userDateOfBirth.text.toString()
 
         //Get image path
@@ -319,13 +321,15 @@ class RegistrationFragment : Fragment() {
                     "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
                     ".{6,8}" +               //at least 6 characters
-                    "$")
+                    "$"
+        )
         return passwordREGEX.matcher(password).matches()
     }
 
     fun isValidUserName(userName: String): Boolean {
         val USER_NAME =
-            Pattern.compile("^" +
+            Pattern.compile(
+                "^" +
                         "(?=.*[0-9])" +         //at least 1 digit
                         //"(?=.*[a-z])" +         //at least 1 lower case letter
                         //"(?=.*[A-Z])" +         //at least 1 upper case letter
@@ -333,13 +337,15 @@ class RegistrationFragment : Fragment() {
                         //"(?=.*[@#$%^&+=])" +    //at least 1 special character
                         "(?=\\S+$)" +           //no white spaces
                         ".{4,}" +               //at least 6 characters
-                        "$")
+                        "$"
+            )
         return USER_NAME.matcher(userName).matches()
     }
 
     fun isValidFirstLastName(userName: String): Boolean {
         val USER_NAME =
-            Pattern.compile("^" +
+            Pattern.compile(
+                "^" +
 //                    "(?=.*[0-9])" +         //at least 1 digit
                         //"(?=.*[a-z])" +         //at least 1 lower case letter
                         //"(?=.*[A-Z])" +         //at least 1 upper case letter
@@ -347,7 +353,8 @@ class RegistrationFragment : Fragment() {
                         //"(?=.*[@#$%^&+=])" +    //at least 1 special character
 //                    "(?=\\S+$)" +           //no white spaces
                         ".{4,}" +               //at least 6 characters
-                        "$")
+                        "$"
+            )
         return USER_NAME.matcher(userName).matches()
     }
 
@@ -360,7 +367,7 @@ class RegistrationFragment : Fragment() {
         //Get Radio Button functionality
         getRadioButtonText()
         Log.e("Radio Button text", radioButtonText)
-        Log.e("Email", registerEmail.text.toString())
+        Log.e("Email", registerEmail.editText?.text.toString())
 
         httpRequest.setOnResponseListener { response ->
             Log.e("Registration Response", response.text)
@@ -379,25 +386,42 @@ class RegistrationFragment : Fragment() {
 //                appGlobals.saveLoginOrBoolean(true)
             } else if (response.code != HttpResponse.HTTP_CREATED) {
                 progressBar!!.visibility = View.GONE
-                showToast(response.text)
+
+                val builder = MaterialAlertDialogBuilder(requireContext())
+                builder.setPositiveButton("Ok") { _, _ ->
+                    builder.create().dismiss()
+                }
+                builder.setTitle("Registration Error")
+                builder.setMessage(response.text)
+                builder.setCancelable(false)
+                builder.create().show()
+//                showToast(response.text)
             }
         }
 
         httpRequest.setOnErrorListener {
             progressBar!!.visibility = View.GONE
             Log.e("Response Error", it.reason)
-            showToast(it.reason)
+            val builder = MaterialAlertDialogBuilder(requireContext())
+            builder.setPositiveButton("Ok") { _, _ ->
+                builder.create().dismiss()
+            }
+            builder.setTitle("Server Error")
+            builder.setMessage(it.reason)
+            builder.setCancelable(false)
+            builder.create().show()
+//            showToast(it.reason)
         }
 
         val formData = FormData()
         try {
-            formData.put("username", registerUserName.text.toString().trim())
-            formData.put("first_name", registerFirstName.text.toString().trim())
-            formData.put("last_name", registerLastName.text.toString().trim())
-            formData.put("email", registerEmail.text.toString().trim())
+            formData.put("username", registerUserName.editText?.text.toString().trim())
+            formData.put("first_name", registerFirstName.editText?.text.toString().trim())
+            formData.put("last_name", registerLastName.editText?.text.toString().trim())
+            formData.put("email", registerEmail.editText?.text.toString().trim())
             formData.put("date_of_birth", userDateOfBirth.text.toString().trim())
-            formData.put("password", registerPassword.text.toString().trim())
-            formData.put("phone_number", userPhone.text.toString().trim())
+            formData.put("password", registerPassword.editText?.text.toString().trim())
+            formData.put("phone_number", userPhone.editText?.text.toString().trim())
             formData.put("gender", radioButtonText)
             if (imageUri != null) {
                 formData.put("image", File(imageRealPath))
@@ -407,7 +431,7 @@ class RegistrationFragment : Fragment() {
         }
 
         editor = sharedPreferences.edit()
-        editor.putString("email", registerEmail.text.toString())
+        editor.putString("email", registerEmail.editText?.text.toString())
         editor.apply()
         httpRequest.post(AppGlobals.REGISTER_API, formData)
     }
