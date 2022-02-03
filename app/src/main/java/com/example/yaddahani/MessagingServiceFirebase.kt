@@ -42,6 +42,7 @@ class MessagingServiceFirebase : FirebaseMessagingService() {
 
 //                Log.e("listmf", getReminderListModel.size.toString())
 
+//                val activity = Activity()
                 Log.e("foregroundnotify", FriendListFragment.isForeGround.toString())
 
                 if (msg == "New Friend Request" && FriendListFragment.isForeGround) {
@@ -50,7 +51,7 @@ class MessagingServiceFirebase : FirebaseMessagingService() {
                 } else if (msg == "Friend Request Accepted" && FriendListFragment.isForeGround) {
                     friendListFragment.addedFriendsList(applicationContext)
                 } else if (msg == "New Reminder") {
-                    friendReminderFragment.getAllFriendsReminders()
+                    friendReminderFragment.getAllFriendsReminders(applicationContext)
                 }
                 Log.d("Notification msg", msg)
                 Log.d("Notification msg", body)
