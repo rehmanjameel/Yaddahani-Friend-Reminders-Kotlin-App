@@ -244,8 +244,10 @@ class FriendReminderFragment : Fragment() {
                                 Log.e("Alarm", "Alarm")
                                 alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(friendReminderDate.toLong(), pendingIntent), pendingIntent)
                             } else {
-                                Log.e("Alarm1", "${friendReminderDate.toLong()}")
-                                alarmManager.set(AlarmManager.RTC_WAKEUP, friendReminderDate.toLong(), pendingIntent)
+                                Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
+                                alarmManager.set(AlarmManager.RTC_WAKEUP,
+                                    (friendReminderDate.toLong()) - (120 * 60 * 1000),
+                                    pendingIntent)
                                 Log.e("Alarm2", "Alarm")
                             }
                         }
@@ -320,6 +322,8 @@ class FriendReminderFragment : Fragment() {
 
         getReminderHttpRequest.setOnErrorListener {
             Log.e("getReminders error", "$it")
+            Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
+
         }
         val token = appGlobals.getValueString("userToken")
         val headers = HttpHeaders("Authorization", "Token $token")
