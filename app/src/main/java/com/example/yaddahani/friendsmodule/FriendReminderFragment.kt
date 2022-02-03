@@ -146,13 +146,6 @@ class FriendReminderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val model : FriendsRemindersListModel
-//
-//        Log.e("listmf", getReminderListModel.size.toString())
-        val bundle: Bundle? = this.arguments
-
-//        model = bundle?.getSerializable("ReminderId") as FriendsRemindersListModel
-
         getAllFriendsReminders()
     }
     //
