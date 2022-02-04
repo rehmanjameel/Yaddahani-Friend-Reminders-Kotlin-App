@@ -124,15 +124,17 @@ class FriendReminderFragment : Fragment() {
 //        Log.e("Sere", getRemindersDBList.toString())
         //
         progressBar = view.progress_Bar
-//        progressBar!!.visibility = View.VISIBLE
-//        i = progressBar!!.progress
-        val loadingDialog = LoadingDialog(requireActivity())
+        progressBar!!.visibility = View.VISIBLE
+        i = progressBar!!.progress
 
-        loadingDialog.startDialog()
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                loadingDialog.dismissDialog()
-            }, 1000)
+//        val loadingDialog = LoadingDialog(requireActivity())
+//
+//        loadingDialog.startDialog()
+//        Handler(Looper.getMainLooper()).postDelayed(
+//            {
+//                loadingDialog.dismissDialog()
+//            }, 1000)
+
         actionMoreButton = view.moreMenuOptionId
         actionMoreButton.setOnClickListener {
             showPopup()
@@ -195,9 +197,9 @@ class FriendReminderFragment : Fragment() {
 
                 for (i in 0 until jsonArray!!.length()) {
 
-//                    if (!onForeGround) {
-//                        progressBar!!.progress = i
-//                    }
+                    if (!onForeGround) {
+                        progressBar!!.progress = i
+                    }
                     Log.e("listi", i.toString())
 
                     val jsonObject = jsonArray.getJSONObject(i)
@@ -219,40 +221,50 @@ class FriendReminderFragment : Fragment() {
 //                        val timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a")
 
                         val instant = Instant.ofEpochMilli(friendReminderDate.toLong())
+                        val instant1 = Instant.ofEpochMilli(friendReminderDate.toLong() - (120 * 60 * 1000))
                         val date = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
-//                        println(dateFormatter.format(date))
-//                        println(timeFormatter.format(date))
+                        val date1 = LocalDateTime.ofInstant(instant1, ZoneId.systemDefault())
 //                        val exactDate = dateFormatter.format(date)
 //                        val exactTime = timeFormatter.format(date)
                         val exactDateTime = dateTimeFormatter.format(date)
+
+                        val alarmDate = Date(friendReminderDate.toLong())
 
                         //Current date time
                         val dates = Date()
                         val stringFormat = SimpleDateFormat("dd-MM-yyyy hh:mm:ss a")
                         val dateTimeTo = stringFormat.format(dates.time)
-                        Log.d("D", dateTimeTo.toString())
 
                         //Set Alarm
 
-                        if (exactDateTime > dateTimeTo) {
+                        if (alarmDate.after(dates)) {
+                            Log.d("D", dates.toString())
+                            Log.d("AlarmDate", alarmDate.toString())
+                            Log.e("2 hour ago", dateTimeFormatter.format(date1))
+                            println(friendReminderDate.toLong() - (120 * 60 * 1000))
+                            Log.e("Set", exactDateTime)
+
                             val alarmManager: AlarmManager = context.getSystemService(
                                 AppCompatActivity.ALARM_SERVICE) as AlarmManager
                             val alarmIntent = Intent(requireContext(), AlarmReceiver::class.java)
-                            val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, alarmIntent, 0)
+                            val pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0)
 
                             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                                 Log.e("Alarm", "Alarm")
-                                alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(friendReminderDate.toLong(), pendingIntent), pendingIntent)
+                                alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(friendReminderDate.toLong() - 120*60*1000,
+                                    pendingIntent), pendingIntent)
                             } else {
                                 Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
-                                alarmManager.set(AlarmManager.RTC_WAKEUP,
-                                    (friendReminderDate.toLong()) - (120 * 60 * 1000),
+                                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
+                                    (friendReminderDate.toLong()) - 120 * 60 * 1000,
                                     pendingIntent)
                                 Log.e("Alarm2", "Alarm")
                             }
                         }
+//                        if (exactDateTime > dateTimeTo) {
+//
+//                        }
                     }
-
                 }
 
                 if (friendReminderFromName != loggedInUser) {
@@ -261,66 +273,71 @@ class FriendReminderFragment : Fragment() {
                         reminder = FriendsRemindersListModel(0, friendReminderId.toInt(), friendReminderText, friendReminderDate,
                             friendReminderFromName, friendReminderToName, friendReminderStatus)
                     }
-
                 }
 
-//                if (getReminderListModel.size.toString() > remindersListModel.size.toString()) {
-//                    Log.e("serverListSize", getReminderListModel.size.toString())
-//                    Log.e("dbListSize", remindersListModel.size.toString())
-//                    Log.e("JsonListSize", jsonArray.length().toString())
-//
+                if (getReminderListModel.size.toString() > remindersListModel.size.toString()) {
+                    Log.e("serverListSize", getReminderListModel.size.toString())
+                    Log.e("dbListSize", remindersListModel.size.toString())
+                    Log.e("JsonListSize", jsonArray.length().toString())
+
 //                    for (i in 0 until getReminderListModel.size - 1) {
-//                        Log.e("present", getReminderListModel[i].reminderId.toString())
-//                        var isPresent = false
-//                        for (j in 0 until remindersListModel.size - 1) {
-//                            Log.e("present", remindersListModel.toString())
-//
-//                            if (remindersListModel.isNotEmpty()) {
-//                                if (getReminderListModel[i].reminderId == remindersListModel[i].reminderId) {
-//                                    isPresent = true
-//                                }
-//                            }
-//                        }
-//                        Log.e("presenting", "${!isPresent}")
-//
-//                        if (isPresent) {
-//                            remindersViewModel.addingReminder(reminder)
-//
-//                        }
-//                    }
-//                }
-//                else if (getReminderListModel.size.toString() < remindersListModel.size.toString()) {
-//                    for (i in 0 until remindersListModel.size - 1) {
-//                        for (j in 0 until getReminderListModel.size - 1) {
-////                        var isRemoved = false
-////                        Log.e("i's", i.toString())
-//                            Log.e("i's", getReminderListModel.size.toString())
-//                            Log.e("i'ss", remindersListModel.size.toString())
-//
-//                            if (remindersListModel.isNotEmpty()) {
-//                                Log.e("delete3", remindersListModel[i].reminderId.toString())
-//                                Log.e("delete3", remindersListModel[i].reminderText)
-//                                Log.e("delete4", getReminderListModel[j].reminderId.toString())
-//                                Log.e("delete4", getReminderListModel[j].reminderText)
-//                                if (remindersListModel[i].reminderId != getReminderListModel[i].reminderId ) {
-//                                    Log.e("delete2", remindersListModel[i].reminderId.toString())
-//                                    remindersViewModel.deleteReminder(remindersListModel[i].reminderId)
-////                                    getReminderListAdapter.notifyItemRemoved(i)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                        Log.e("present", getReminderListModel[i].reminderId.toString())
+                        var isPresent = false
+                        for (j in 0 until getReminderListModel.size - 1) {
+                            Log.e("present", remindersListModel.toString())
 
-                if (getReminderListModel.size.toString() != getRemindersDBList.size.toString()) {
-                    remindersViewModel.deleteReceivedReminders()
-                    remindersViewModel.addReminder(getReminderListModel)
+                            if (remindersListModel.isNotEmpty()) {
+                                if (getReminderListModel[j].reminderId == remindersListModel[j].reminderId) {
+                                    isPresent = true
+                                }
+                            }
+                        }
+                        Log.e("presenting", "${!isPresent}")
+
+                        if (isPresent) {
+                            remindersViewModel.addingReminder(reminder)
+
+                        }
+//                    }
+                }
+                else if (getReminderListModel.size.toString() < remindersListModel.size.toString()) {
+                    for (i in 0 until remindersListModel.size - 1) {
+                        for (j in 0 until getReminderListModel.size - 1) {
+//                        var isRemoved = false
+//                        Log.e("i's", i.toString())
+                            Log.e("i's", getReminderListModel.size.toString())
+                            Log.e("i'ss", remindersListModel.size.toString())
+
+                            if (remindersListModel.isNotEmpty()) {
+                                Log.e("delete3", remindersListModel[i].reminderId.toString())
+                                Log.e("delete3", remindersListModel[i].reminderText)
+                                Log.e("delete4", getReminderListModel[j].reminderId.toString())
+                                Log.e("delete4", getReminderListModel[j].reminderText)
+                                if (remindersListModel[i].reminderId != getReminderListModel[i].reminderId ) {
+                                    Log.e("delete2", remindersListModel[i].reminderId.toString())
+                                    remindersViewModel.deleteReminder(remindersListModel[i].reminderId)
+//                                    getReminderListAdapter.notifyItemRemoved(i)
+                                }
+                            }
+                        }
+                    }
                 }
 
+//                if (getReminderListModel.size.toString() != getRemindersDBList.size.toString()) {
+//                    remindersViewModel.deleteReceivedReminders()
+//                    remindersViewModel.addReminder(getReminderListModel)
+//                }
+
+                if (progressBar!= null) {
+                    progressBar!!.visibility = View.GONE
+                }
             }
         }
 
         getReminderHttpRequest.setOnErrorListener {
+            if (progressBar != null) {
+                progressBar!!.visibility = View.GONE
+            }
             Log.e("getReminders error", "$it")
             Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
 

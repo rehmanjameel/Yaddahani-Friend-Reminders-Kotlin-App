@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import com.example.yaddahani.AppGlobals
 import com.example.yaddahani.R
 import com.example.yaddahani.friendsmodule.HomeActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import org.json.JSONObject
@@ -155,10 +156,6 @@ class LoginFragment : Fragment() {
             Log.e("Login Response", loginResponse.code.toString())
             Log.e("Login Text", loginResponse.text.toString())
 
-            if (loginResponse.code in 400 .. 499){
-                Toast.makeText(requireContext(), loginResponse.text, Toast.LENGTH_SHORT).show()
-            }
-
             if (loginResponse.code == HttpResponse.HTTP_OK) {
                 val intent = Intent(activity, HomeActivity::class.java)
                 startActivity(intent)
@@ -182,13 +179,29 @@ class LoginFragment : Fragment() {
 
             } else if (loginResponse.code != HttpResponse.HTTP_OK) {
                 progressBar!!.visibility = View.GONE
-                Toast.makeText(requireContext(), loginResponse.reason, Toast.LENGTH_SHORT).show()
+                val build = MaterialAlertDialogBuilder(requireContext())
+                build.setPositiveButton("Ok") {_,_ ->
+                    build.create().dismiss()
+                }
+                build.setTitle("Login Error")
+                build.setMessage("User ${loginResponse.reason}")
+                build.setCancelable(false)
+                build.create().show()
+//                Toast.makeText(requireContext(), loginResponse.reason, Toast.LENGTH_SHORT).show()
             }
         }
 
         httpLoginRequest.setOnErrorListener {
             progressBar!!.visibility = View.GONE
-            Toast.makeText(requireContext(), it.reason, Toast.LENGTH_SHORT).show()
+            val build = MaterialAlertDialogBuilder(requireContext())
+            build.setPositiveButton("Ok") {_,_ ->
+                build.create().dismiss()
+            }
+            build.setTitle("Server Error")
+            build.setMessage(it.reason)
+            build.setCancelable(false)
+            build.create().show()
+//            Toast.makeText(requireContext(), it.reason, Toast.LENGTH_SHORT).show()
             Log.e("Login Response", it.reason)
         }
 

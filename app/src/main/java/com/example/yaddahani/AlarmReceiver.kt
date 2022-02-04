@@ -12,20 +12,28 @@ import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.yaddahani.friendsmodule.HomeActivity
 
 class AlarmReceiver: BroadcastReceiver() {
+
+    private val appGlobals = AppGlobals()
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     override fun onReceive(context: Context?, intent: Intent?) {
 
+        val title = appGlobals.getValueString("NotificationTitle")
+        val body = appGlobals.getValueString("NotificationBody")
+//        if (intent?.action == "android.intent.action.BOOT_COMPLETED") {
+            showNotification(context!!, title.toString(), body.toString())
+//        }
         Log.e("Checking notify", "Notification")
 
-        Toast.makeText(context, "Alarm", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, "Alarm", Toast.LENGTH_SHORT).show()
 
         Log.e("Checking ", "Notification")
 
-        showNotification(context!!, "Reminder time", "Reminder")
 //        ringTone(context)
     }
 
@@ -37,7 +45,7 @@ class AlarmReceiver: BroadcastReceiver() {
 //        Toast.makeText(context, "Alarm Called", Toast.LENGTH_SHORT).show()
 //    }
 
-    fun showNotification(ctx: Context, message: String, title: String) {
+    fun showNotification(ctx: Context, title: String, message: String) {
         val notificationManager =
             ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
