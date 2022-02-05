@@ -68,12 +68,12 @@ class LoginFragment : Fragment() {
         val getToken = appGlobals.getValueString("userToken")
         Log.e("Checking", getToken.toString())
 
-        if (appGlobals.isLoggedInOrGetValueBoolean()) {
-            val intent = Intent(activity, HomeActivity::class.java)
-            startActivity(intent)
-            requireActivity().overridePendingTransition(0,0)
-            this.activity?.finish()
-        }
+//        if (appGlobals.isLoggedInOrGetValueBoolean()) {
+//            val intent = Intent(activity, HomeActivity::class.java)
+//            startActivity(intent)
+//            requireActivity().overridePendingTransition(0,0)
+//            this.activity?.finish()
+//        }
 //        if (getToken != "") {
 //            val intent = Intent(activity, HomeActivity::class.java)
 //            startActivity(intent)
