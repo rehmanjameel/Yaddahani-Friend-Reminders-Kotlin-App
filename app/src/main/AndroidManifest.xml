@@ -17,25 +17,26 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Yaddehani"
+        android:theme="@style/Theme.App.Starting"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".SplashScreen"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".friendsmodule.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <receiver
