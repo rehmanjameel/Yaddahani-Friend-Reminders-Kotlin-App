@@ -31,6 +31,7 @@ import com.example.yaddahani.*
 import com.example.yaddahani.adapters.FriendsRemindersListAdapter
 import com.example.yaddahani.models.FriendsRemindersListModel
 import com.example.yaddahani.roomDB.RemindersViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_friend_reminder.view.*
 import me.ibrahimsn.lib.SmoothBottomBar
@@ -330,6 +331,15 @@ class FriendReminderFragment : Fragment() {
                 if (progressBar!= null) {
                     progressBar!!.visibility = View.GONE
                 }
+            } else if (getReminderListResponse.code != HttpResponse.HTTP_OK) {
+                val builder = MaterialAlertDialogBuilder(context)
+                builder.setPositiveButton("Ok") {_, _ ->
+                    builder.create().dismiss()
+                }
+                builder.setTitle("Error")
+                builder.setMessage(getReminderListResponse.reason)
+                builder.setCancelable(false)
+                builder.create().show()
             }
         }
 
@@ -337,6 +347,14 @@ class FriendReminderFragment : Fragment() {
             if (progressBar != null) {
                 progressBar!!.visibility = View.GONE
             }
+            val builder = MaterialAlertDialogBuilder(context)
+            builder.setPositiveButton("Ok") {_, _ ->
+                builder.create().dismiss()
+            }
+            builder.setTitle("Error")
+            builder.setMessage(it.reason)
+            builder.setCancelable(false)
+            builder.create().show()
             Log.e("getReminders error", "$it")
 //            Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
 
