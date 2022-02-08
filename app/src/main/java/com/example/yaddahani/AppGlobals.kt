@@ -24,7 +24,7 @@ class AppGlobals : Application() {
 
         val PREFS_NAME = "sharedPrefs"
         val KEY_LOGGED_IN = "login_key"
-        const val SERVER = "http://192.168.100.205:8000"
+        const val SERVER = "http://192.168.100.126:8000"
         private val API = String.format("%s/api/", SERVER)
         val REGISTER_API = String.format("%sregister/", API)
         val REQUEST_OTP_API = String.format("%srequest_otp/", API)

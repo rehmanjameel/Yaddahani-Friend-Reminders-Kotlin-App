@@ -12,9 +12,10 @@
         # Required for
         # animated icons
 
-        <item name="android:windowSplashScreenBrandingImage">@drawable/yaddahanitext</item>
         // Set the theme of the Activity that directly follows your splash screen.
         <item name="postSplashScreenTheme">@style/Theme.Yaddehani</item>
         # Required.
+        <item name="android:windowSplashScreenBrandingImage">@drawable/yaddahanitext</item>
     </style>
+
 </resources>

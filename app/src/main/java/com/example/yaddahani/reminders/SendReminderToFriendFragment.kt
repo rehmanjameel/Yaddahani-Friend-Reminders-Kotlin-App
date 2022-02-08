@@ -79,8 +79,8 @@ class SendReminderToFriendFragment : Fragment() {
         bottomNavigationView.visibility = View.GONE
 
         progressBar = view.sentReminderProgress_Bar
-//        progressBar!!.visibility = View.VISIBLE
-//        i = progressBar!!.progress
+        progressBar!!.visibility = View.VISIBLE
+        i = progressBar!!.progress
 
         moreActionButton = view.toSendFriendReminderMoreVertIt
 
