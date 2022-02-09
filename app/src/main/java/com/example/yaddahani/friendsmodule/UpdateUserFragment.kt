@@ -43,8 +43,8 @@ class UpdateUserFragment : Fragment() {
 
     private lateinit var updateBackArrowImageView: ImageView
     private val appGlobals = AppGlobals()
-    private var radioButtonText = ""
-    private lateinit var radioGroup: RadioGroup
+//    private var radioButtonText = ""
+//    private lateinit var radioGroup: RadioGroup
     var imageUri: Uri? = null
     private lateinit var radioButtons: RadioButton
     private lateinit var realPathUtil: RealPathUtils
@@ -59,7 +59,7 @@ class UpdateUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.GONE
 
         val firstName = appGlobals.getValueString("profileFirstName")
@@ -76,7 +76,7 @@ class UpdateUserFragment : Fragment() {
             .load("${AppGlobals.SERVER}${image}")
             .into(view.updateProfileImageView)
 
-        radioGroup = view.updateRadioGroupId
+//        radioGroup = view.updateRadioGroupId
         updateBackArrowImageView = view.findViewById(R.id.updateBackArrowId)
 
         updateBackArrowImageView.setOnClickListener {
@@ -160,11 +160,11 @@ class UpdateUserFragment : Fragment() {
 
     private fun getRadioButtonText() {
         //Getting radio button text on the base of radio button id
-        val radioButtonId: Int = radioGroup.checkedRadioButtonId
-        if (radioButtonId != -1) {
-            radioButtons = requireView().findViewById(radioButtonId)
-        }
-        radioButtonText = radioButtons.text.toString()
+//        val radioButtonId: Int = radioGroup.checkedRadioButtonId
+//        if (radioButtonId != -1) {
+//            radioButtons = requireView().findViewById(radioButtonId)
+//        }
+//        radioButtonText = radioButtons.text.toString()
     }
 
     private fun updateProfile() {
@@ -195,7 +195,7 @@ class UpdateUserFragment : Fragment() {
         try {
             formData.put("first_name", updateFirstNameETId.text.toString())
             formData.put("last_name", updateLastNameETId.text.toString())
-            formData.put("gender", radioButtonText)
+//            formData.put("gender", radioButtonText)
             formData.put("phone_number", updateContactETId.text.toString())
             if (imageUri != null) {
                 formData.put("image", File(imageRealPath))

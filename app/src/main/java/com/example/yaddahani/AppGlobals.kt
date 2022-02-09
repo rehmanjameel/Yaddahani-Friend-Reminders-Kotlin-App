@@ -104,7 +104,6 @@ class AppGlobals : Application() {
     }
 
     fun logoutOrClearSharedPreference() {
-
         val editor: SharedPreferences.Editor = sharedPref.edit()
 
         editor.clear()

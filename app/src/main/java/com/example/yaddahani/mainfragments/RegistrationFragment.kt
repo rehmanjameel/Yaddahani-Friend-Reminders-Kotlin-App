@@ -57,12 +57,13 @@ class RegistrationFragment : Fragment() {
     private lateinit var userPhone: TextInputLayout
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButtons: RadioButton
-    private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
+
+    //    private lateinit var sharedPreferences: SharedPreferences
+//    private lateinit var editor: SharedPreferences.Editor
     private lateinit var realPathUtil: RealPathUtils
 
     private var progressBar: ProgressBar? = null
-    private val appGlobals = AppGlobals()
+    private val verifyAppGlobals = AppGlobals()
     private var imageRealPath: String = ""
     private var radioButtonText = ""
     private val httpRequest = HttpRequest()
@@ -124,8 +125,7 @@ class RegistrationFragment : Fragment() {
 //            fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
 //                .addToBackStack(null).commit()
 //        }
-        sharedPreferences = this.requireActivity()
-            .getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
+//        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
         registrationButton.setOnClickListener {
             registerUser()
         }
@@ -288,7 +288,7 @@ class RegistrationFragment : Fragment() {
             registerEmail.error = "Invalid email. hint:abc12@gmail.com"
         } else if (!isValidPasswordFormat(userPassword)) {
             registerPassword.error =
-                "max length 6-8 characters 1 digit a-zA-Z any alphabet and no white spaces"
+                "min 6 characters long 1 digit a-zA-Z any alphabet and no white spaces"
         }
 //        else if (imageRealPath == "null") {
 //            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
@@ -320,7 +320,7 @@ class RegistrationFragment : Fragment() {
                     "(?=.*[a-zA-Z])" +      //any letter
                     "(?=.*[@#$%^&+=])" +    //at least 1 special character
                     "(?=\\S+$)" +           //no white spaces
-                    ".{6,8}" +               //at least 6 characters
+                    ".{6,}" +               //at least 6 characters
                     "$"
         )
         return passwordREGEX.matcher(password).matches()
@@ -330,10 +330,10 @@ class RegistrationFragment : Fragment() {
         val USER_NAME =
             Pattern.compile(
                 "^" +
-                        "(?=.*[0-9])" +         //at least 1 digit
+//                        "(?=.*[0-9])" +         //at least 1 digit
                         //"(?=.*[a-z])" +         //at least 1 lower case letter
                         //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                        "(?=.*[a-zA-Z])" +      //any letter
+                        "(?=.*[a-zA-Z0-9])" +      //any letter
                         //"(?=.*[@#$%^&+=])" +    //at least 1 special character
                         "(?=\\S+$)" +           //no white spaces
                         ".{4,}" +               //at least 6 characters
@@ -374,13 +374,21 @@ class RegistrationFragment : Fragment() {
 
             if (response.code == HttpResponse.HTTP_CREATED) {
                 Log.e("Registration Response", "${response.code}")
-                progressBar!!.visibility = View.VISIBLE
-                progressBar!!.progress = 100
+//                progressBar!!.visibility = View.VISIBLE
+//                progressBar!!.progress = 100
+                verifyAppGlobals.saveString(
+                    "RegisterEmail",
+                    registerEmail.editText?.text.toString()
+                )
+
                 val fragmentManager = parentFragmentManager
                 fragmentManager.popBackStack()
                 fragmentManager.beginTransaction()
-                    .replace(R.id.fragment, EmailVerificationFragment())
-                    .addToBackStack(null).commit()
+                    .replace(R.id.fragment, EmailVerificationFragment()).commit()
+                verifyAppGlobals.saveString(
+                    "RegisterEmail1",
+                    registerEmail.editText?.text.toString()
+                )
 
                 sendOTP()
 //                appGlobals.saveLoginOrBoolean(true)
@@ -430,14 +438,14 @@ class RegistrationFragment : Fragment() {
             Log.e("JSonException", "$e")
         }
 
-        editor = sharedPreferences.edit()
-        editor.putString("email", registerEmail.editText?.text.toString())
-        editor.apply()
+//        editor = sharedPreferences.edit()
+//        editor.putString("email", registerEmail.editText?.text.toString())
+//        editor.apply()
         httpRequest.post(AppGlobals.REGISTER_API, formData)
     }
 
     private fun sendOTP() {
-        val userEmail = sharedPreferences.getString("email", "")
+        val userEmail = verifyAppGlobals.getValueString("RegisterEmail")
         httpRequest.setOnResponseListener { otpResponse ->
             Log.e("Otp Code", otpResponse.code.toString())
             Log.e("Otp Text", otpResponse.text.toString())

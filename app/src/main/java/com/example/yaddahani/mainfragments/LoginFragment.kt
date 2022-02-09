@@ -67,12 +67,28 @@ class LoginFragment : Fragment() {
         //after opening the app second time go to home screen directly if user not logged out
         val getToken = appGlobals.getValueString("userToken")
         Log.e("Checking", getToken.toString())
+        Log.e("Checking", appGlobals.isLoggedInOrGetValueBoolean().toString())
+
+        val checkEmail = appGlobals.getValueString("RegisterEmail")
+        Log.e("Checking", checkEmail?.isNotEmpty().toString())
 
         if (appGlobals.isLoggedInOrGetValueBoolean()) {
+            Log.e("Checking1", getToken.toString())
+
             val intent = Intent(activity, HomeActivity::class.java)
             startActivity(intent)
             requireActivity().overridePendingTransition(0,0)
             this.activity?.finish()
+        }
+        else if (checkEmail != null) {
+            Log.e("Checking2", checkEmail.isNotEmpty().toString())
+
+//            if (checkEmail.isNotEmpty()) {
+                val fragmentManager = parentFragmentManager
+                fragmentManager.popBackStack()
+                fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
+                    .addToBackStack(null).commit()
+//            }
         }
 //        if (getToken != "") {
 //            val intent = Intent(activity, HomeActivity::class.java)

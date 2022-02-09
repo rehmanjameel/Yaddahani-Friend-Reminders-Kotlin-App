@@ -48,6 +48,7 @@ import kotlin.collections.ArrayList
 class SendReminderToFriendFragment : Fragment() {
 
     companion object {
+        val isForeGround : Boolean = false
         private lateinit var recyclerView: RecyclerView
         lateinit var sentReminderAdapter : SentRemindersAdapter
 
@@ -170,7 +171,9 @@ class SendReminderToFriendFragment : Fragment() {
                 val jsonArray = getReminderListResponse.toJSONArray()
                 sentReminderModelArray.clear()
                 for (i in 0 until jsonArray!!.length()) {
-//                    progressBar!!.progress = i
+                    if (!isForeGround) {
+                        progressBar!!.progress = i
+                    }
                     val jsonObject = jsonArray.getJSONObject(i)
 
                     val sentFriendReminderText = jsonObject.getString("reminder")
@@ -190,7 +193,9 @@ class SendReminderToFriendFragment : Fragment() {
                         recyclerView.adapter = sentReminderAdapter
                     }
                 }
-//                progressBar!!.visibility = View.GONE
+                if (progressBar != null) {
+                    progressBar!!.visibility = View.GONE
+                }
             }
         }
 

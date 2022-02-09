@@ -37,10 +37,11 @@ class EmailVerificationFragment : Fragment() {
     private lateinit var resendButton: Button
     private lateinit var emailVerificationButton: Button
     private lateinit var userVerificationEmail: TextView
-    private lateinit var verificationBackArrow: ImageView
+//    private lateinit var verificationBackArrow: ImageView
     private lateinit var otpVerifyEditText: TextInputEditText
     private lateinit var countDownTimer : CountDownTimer
 
+    private val verifiedAppGlobals = AppGlobals()
     private var email = ""
     lateinit var sharedPreferences: SharedPreferences
     private val httpRequest = HttpRequest()
@@ -51,17 +52,17 @@ class EmailVerificationFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_email_verification, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val fragmentManager = parentFragmentManager
-                fragmentManager.popBackStack()
-                fragmentManager.beginTransaction().replace(R.id.fragment, RegistrationFragment())
-                    .addToBackStack(null).commit()
-            }
-        })
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+//            override fun handleOnBackPressed() {
+//                val fragmentManager = parentFragmentManager
+//                fragmentManager.popBackStack()
+//                fragmentManager.beginTransaction().replace(R.id.fragment, RegistrationFragment())
+//                    .addToBackStack(null).commit()
+//            }
+//        })
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,11 +71,12 @@ class EmailVerificationFragment : Fragment() {
         emailVerificationButton = view.emailVerificationButtonId
         userVerificationEmail = view.verificationEmailId
         otpVerifyEditText = view.otpVerifyETId
-        verificationBackArrow = view.verifyEmailBackArrowId
+//        verificationBackArrow = view.verifyEmailBackArrowId
 
-        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        email = sharedPreferences.getString("email", "").toString()
+//        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        email = verifiedAppGlobals.getValueString("RegisterEmail").toString()
         userVerificationEmail.text = email
+        Log.i("Check Email", verifiedAppGlobals.getValueString("RegisterEmail").toString())
 
         startCountDownTimer()
 
@@ -86,14 +88,12 @@ class EmailVerificationFragment : Fragment() {
             reSendOTP()
         }
 
-        verificationBackArrow.setOnClickListener {
-            val fragmentManager = parentFragmentManager
-            fragmentManager.popBackStack()
-            fragmentManager.beginTransaction().replace(R.id.fragment, RegistrationFragment())
-                .addToBackStack(null).commit()
-//            findNavController().popBackStack(R.id.action_emailVerificationFragment_to_registrationFragment, true)
-//            findNavController().popBackStack()
-        }
+//        verificationBackArrow.setOnClickListener {
+//            val fragmentManager = parentFragmentManager
+//            fragmentManager.popBackStack()
+//            fragmentManager.beginTransaction().replace(R.id.fragment, RegistrationFragment())
+//                .addToBackStack(null).commit()
+//        }
 
     }
 
@@ -128,11 +128,15 @@ class EmailVerificationFragment : Fragment() {
                     startCountDownTimer()
                     countDownTimer.cancel()
                     Log.e("timer", "$countDownTimer")
+//                    Log.e("timer", verifiedAppGlobals.logoutOrClearSharedPreference().toString())
 
                     val fragmentManager = parentFragmentManager
                     fragmentManager.popBackStack()
                     fragmentManager.beginTransaction().replace(R.id.fragment, LoginFragment())
                         .addToBackStack(null).commit()
+                    verifiedAppGlobals.logoutOrClearSharedPreference()
+
+//                    appGlobals.removeValue("RegisterEmail")
 //                findNavController().popBackStack()
                 } else if(otpVerifyResponse.code != HttpResponse.HTTP_OK) {
                     val builder = MaterialAlertDialogBuilder(requireContext())
@@ -140,13 +144,21 @@ class EmailVerificationFragment : Fragment() {
                         builder.create().dismiss()
                     }
                     builder.setTitle("OTP Error")
-                    builder.setMessage(otpVerifyResponse.text)
+                    builder.setMessage(otpVerifyResponse.reason)
                     builder.setCancelable(false)
                     builder.create().show()
 //                    Toast.makeText(requireContext(), otpVerifyResponse.text, Toast.LENGTH_SHORT).show()
                 }
             }
             httpRequest.setOnErrorListener {
+                val builder = MaterialAlertDialogBuilder(requireContext())
+                builder.setPositiveButton("Ok") {_, _ ->
+                    builder.create().dismiss()
+                }
+                builder.setTitle("OTP Error")
+                builder.setMessage(it.reason)
+                builder.setCancelable(false)
+                builder.create().show()
                 Log.e("Response Error", "$it")
             }
 
