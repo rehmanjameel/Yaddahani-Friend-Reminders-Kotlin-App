@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.isEmpty
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import com.example.yaddahani.friendsmodule.FriendReminderFragment
 import com.example.yaddahani.models.SentRemindersListModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_send_reminder.*
+import kotlinx.android.synthetic.main.fragment_send_reminder_friend.*
 import kotlinx.android.synthetic.main.fragment_send_reminder_friend.view.*
 import kotlinx.android.synthetic.main.update_reminder.*
 import kotlinx.android.synthetic.main.update_reminder.view.*
@@ -93,6 +95,11 @@ class SendReminderToFriendFragment : Fragment() {
         recyclerView = view.toFriendListReminderRecyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        if (recyclerView.isEmpty()) {
+            view.emptyFriendReminderTextId.visibility = View.VISIBLE
+        } else {
+            view.emptyFriendReminderTextId.visibility = View.GONE
+        }
         view.toSendFriendReminderNameId.text = "${reminderArgs.friendsList.friendFirstName} ${reminderArgs.friendsList.friendLastName}"
         Glide.with(requireContext())
             .load("${AppGlobals.SERVER}${reminderArgs.friendsList.images}")
@@ -191,6 +198,7 @@ class SendReminderToFriendFragment : Fragment() {
                         sentReminderModelArray.reverse()
                         sentReminderAdapter = SentRemindersAdapter(requireActivity(), sentReminderModelArray)
                         recyclerView.adapter = sentReminderAdapter
+                        emptyFriendReminderTextId.visibility = View.GONE
                     }
                 }
                 if (progressBar != null) {
@@ -200,6 +208,11 @@ class SendReminderToFriendFragment : Fragment() {
         }
 
         getReminderHttpRequest.setOnErrorListener {
+            progressBar!!.visibility = View.GONE
+
+            emptyFriendReminderTextId.visibility = View.VISIBLE
+            emptyFriendReminderTextId.text = "Connection Problem"
+
             Log.e("Reminders List", "$it")
         }
         val token = appGlobals.getValueString("userToken")

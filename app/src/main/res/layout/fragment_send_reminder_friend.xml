@@ -98,6 +98,17 @@
         android:backgroundTint="#809fff"
         app:borderWidth="0dp"/>
 
+    <TextView
+        android:id="@+id/emptyFriendReminderTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sent Reminders appear here"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_marginBottom="5dp"/>
+
     <ProgressBar
         android:id="@+id/sentReminderProgress_Bar"
         style="@style/Widget.AppCompat.ProgressBar"

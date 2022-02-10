@@ -46,7 +46,7 @@ class UpdateUserFragment : Fragment() {
 //    private var radioButtonText = ""
 //    private lateinit var radioGroup: RadioGroup
     var imageUri: Uri? = null
-    private lateinit var radioButtons: RadioButton
+//    private lateinit var radioButtons: RadioButton
     private lateinit var realPathUtil: RealPathUtils
     private var imageRealPath: String = ""
 
@@ -158,14 +158,14 @@ class UpdateUserFragment : Fragment() {
         imageRealPath = realPathUtil.getRealPath(requireContext(), imageUri)
     }
 
-    private fun getRadioButtonText() {
+//    private fun getRadioButtonText() {
         //Getting radio button text on the base of radio button id
 //        val radioButtonId: Int = radioGroup.checkedRadioButtonId
 //        if (radioButtonId != -1) {
 //            radioButtons = requireView().findViewById(radioButtonId)
 //        }
 //        radioButtonText = radioButtons.text.toString()
-    }
+//    }
 
     private fun updateProfile() {
         //Get image path
@@ -173,7 +173,7 @@ class UpdateUserFragment : Fragment() {
         imageRealPath = realPathUtil.getRealPath(requireContext(), imageUri)
 
         //
-        getRadioButtonText()
+//        getRadioButtonText()
 
         //
         val httpRequest = HttpRequest()

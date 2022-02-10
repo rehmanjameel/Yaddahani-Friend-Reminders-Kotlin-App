@@ -15,6 +15,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -77,7 +78,7 @@ class ShowReceivedRemindersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Set visibility of bottom bar
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.GONE
 
 //        popUpMenuIcon = view.receivedMoreActionMenuId
@@ -90,10 +91,16 @@ class ShowReceivedRemindersFragment : Fragment() {
         archivedRemindersAdapter.notifyDataSetChanged()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        archivedRemindersViewModel = ViewModelProvider(this)[RemindersViewModel::class.java]
-        archivedRemindersViewModel.reminderArchived.observe(viewLifecycleOwner, androidx.lifecycle.Observer { archivedReminders ->
-            archivedRemindersAdapter.setReminderData(archivedReminders as ArrayList<FriendsRemindersListModel>)
-        })
+        if (recyclerView.isEmpty()) {
+            emptyArchivedReminderTextId.visibility = View.VISIBLE
+        } else {
+            emptyArchivedReminderTextId.visibility = View.GONE
+            archivedRemindersViewModel = ViewModelProvider(this)[RemindersViewModel::class.java]
+            archivedRemindersViewModel.reminderArchived.observe(viewLifecycleOwner, androidx.lifecycle.Observer { archivedReminders ->
+                archivedRemindersAdapter.setReminderData(archivedReminders as ArrayList<FriendsRemindersListModel>)
+            })
+        }
+
         //
 //        val reminderId = receivedArgs.receivedReminders.reminderId
 //        println(reminderId)
@@ -235,7 +242,7 @@ class ShowReceivedRemindersFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.VISIBLE
     }
 

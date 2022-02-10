@@ -70,7 +70,17 @@
                     android:id="@+id/pendingRequestsRecyclerId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/friend_pending_request_list"/>
+                    />
+
+                <TextView
+                    android:id="@+id/noPendingRequestTextId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No Pending Requests"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:layout_marginBottom="5dp"/>
 
             </LinearLayout>
 
@@ -94,6 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/friends_list"/>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -110,6 +121,17 @@
         app:borderWidth="0dp"
         android:layout_margin="10dp"
        android:backgroundTint="#809fff"/>
+
+    <TextView
+        android:id="@+id/noFriendsTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No Friends here"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:layout_marginBottom="5dp"/>
 
     <ProgressBar
         android:id="@+id/friendsListProgress_Bar"

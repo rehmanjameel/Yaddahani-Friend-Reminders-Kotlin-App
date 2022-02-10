@@ -53,7 +53,7 @@ class ShowSentRemindersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Set visibility of bottom bar
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.GONE
 
         popUpMenuIcon = view.sentMoreActionMenuId

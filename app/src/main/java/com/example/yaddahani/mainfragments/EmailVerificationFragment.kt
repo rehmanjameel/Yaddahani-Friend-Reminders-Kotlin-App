@@ -88,6 +88,23 @@ class EmailVerificationFragment : Fragment() {
             reSendOTP()
         }
 
+        view.goToLoginPageId.setOnClickListener {
+            val builder = MaterialAlertDialogBuilder(requireContext())
+            builder.setPositiveButton("Ok") {_, _, ->
+                val fragmentManager = parentFragmentManager
+                fragmentManager.popBackStack()
+                fragmentManager.beginTransaction().replace(R.id.fragment, LoginFragment())
+                    .addToBackStack(null).commit()
+                verifiedAppGlobals.logoutOrClearSharedPreference()
+            }
+            builder.setNegativeButton("Cancel") {_, _ ->
+                builder.create().dismiss()
+            }
+            builder.setTitle("Skip Verification")
+            builder.setMessage("If you go back to Login screen you cannot verify the user $email again")
+            builder.setCancelable(true)
+            builder.create().show()
+        }
 //        verificationBackArrow.setOnClickListener {
 //            val fragmentManager = parentFragmentManager
 //            fragmentManager.popBackStack()

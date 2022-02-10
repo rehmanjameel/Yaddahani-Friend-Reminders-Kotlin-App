@@ -374,8 +374,8 @@ class RegistrationFragment : Fragment() {
 
             if (response.code == HttpResponse.HTTP_CREATED) {
                 Log.e("Registration Response", "${response.code}")
-//                progressBar!!.visibility = View.VISIBLE
-//                progressBar!!.progress = 100
+                progressBar!!.visibility = View.VISIBLE
+                progressBar!!.progress = 100
                 verifyAppGlobals.saveString(
                     "RegisterEmail",
                     registerEmail.editText?.text.toString()

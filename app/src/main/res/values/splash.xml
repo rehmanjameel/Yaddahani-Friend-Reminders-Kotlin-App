@@ -10,7 +10,6 @@
         <item name="windowSplashScreenAnimationDuration">200</item>  # Required for
         # animated icons
 
-        <item name="android:windowSplashScreenBrandingImage" tools:targetApi="s">@drawable/yaddahanitext</item>
         // Set the theme of the Activity that directly follows your splash screen.
         <item name="postSplashScreenTheme">@style/Theme.Yaddehani</item>  # Required.
     </style>

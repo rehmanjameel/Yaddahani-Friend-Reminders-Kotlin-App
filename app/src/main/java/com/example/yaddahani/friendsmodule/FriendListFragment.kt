@@ -15,6 +15,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isEmpty
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,16 +44,16 @@ import pk.codebase.requests.HttpResponse
 
 class FriendListFragment : Fragment() {
 
-    private lateinit var bottomNavigationView: SmoothBottomBar
+//    private lateinit var bottomNavigationView: SmoothBottomBar
 
     companion object {
         var isForeGround: Boolean = false
         lateinit var recyclerPendingRequest: RecyclerView
         lateinit var recyclerViewFriendList: RecyclerView
     }
-    private var progressBar : ProgressBar? = null
-    private var i = 0
-    val alarmReceiver = AlarmReceiver()
+//    private var progressBar : ProgressBar? = null
+//    private var i = 0
+//    val alarmReceiver = AlarmReceiver()
     private lateinit var floatingActionButton: FloatingActionButton
     lateinit var adapterPendingRequest: FriendsPendingRequestAdapter
     lateinit var adapterFriendList: FriendListAdapter
@@ -96,9 +97,21 @@ class FriendListFragment : Fragment() {
         recyclerPendingRequest = view.pendingRequestsRecyclerId
         recyclerPendingRequest.layoutManager = LinearLayoutManager(context)
 
+        if (recyclerPendingRequest.isEmpty()) {
+            view.noPendingRequestTextId.visibility = View.VISIBLE
+        } else {
+            view.noPendingRequestTextId.visibility = View.GONE
+        }
+
         //
         recyclerViewFriendList = view.friendListRecyclerView
         recyclerViewFriendList.layoutManager = LinearLayoutManager(context)
+
+        if (recyclerViewFriendList.isEmpty()) {
+            view.noFriendsTextId.visibility = View.VISIBLE
+        } else {
+            view.noFriendsTextId.visibility = View.GONE
+        }
 
         floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_friendListFragmentId_to_searchFriendFragment)
@@ -150,6 +163,7 @@ class FriendListFragment : Fragment() {
                     recyclerViewFriendList.scrollToPosition(adapterFriendList.itemCount - 1)
                     modelFriendList.reverse()
                     adapterFriendList.notifyDataSetChanged()
+                    noFriendsTextId.visibility = View.GONE
                 }
 
             } else if (addFriendsResponse.code != HttpResponse.HTTP_OK) {
@@ -159,6 +173,8 @@ class FriendListFragment : Fragment() {
         }
 
         addHttpRequest.setOnErrorListener {
+            noFriendsTextId.visibility = View.VISIBLE
+            noFriendsTextId.text = "Connection Problem"
             Log.e("get ResponseText", it.reason)
         }
 
@@ -204,6 +220,7 @@ class FriendListFragment : Fragment() {
                     recyclerPendingRequest.adapter = adapterPendingRequest
                     Log.e("adapter", adapterPendingRequest.toString())
                     adapterPendingRequest.notifyDataSetChanged()
+                    noPendingRequestTextId.visibility = View.GONE
 
                     appGlobals.saveString("requestUser", getRequestUserName)
 //                    appGlobals.saveString("requestFName", getRequestFirstName)
@@ -218,6 +235,8 @@ class FriendListFragment : Fragment() {
         }
 
         getHttpRequest.setOnErrorListener {
+            noPendingRequestTextId.visibility = View.VISIBLE
+            noPendingRequestTextId.text = "Connection Problem"
             Log.e("Get Request Error", it.toString())
         }
 

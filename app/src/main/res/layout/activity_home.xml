@@ -9,12 +9,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="409dp"
         android:layout_height="match_parent"
-        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_above="@id/smoothBottomId"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/home_nav_graph"/>
+        app:navGraph="@navigation/home_nav_graph" />
 
 
 
@@ -26,17 +26,22 @@
 <!--        app:menu="@menu/friends_menu"-->
 <!--        app:labelVisibilityMode="selected"/>-->
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.2dp"
+        android:layout_above="@id/smoothBottomId"
+        android:background="@drawable/shadow_bottombar"/>
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/smoothBottomId"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        app:iconTint="#808080"
-        app:textColor="#4d79ff"
         android:visibility="visible"
-        app:indicatorColor="#b3c6ff"
+        app:iconTint="#808080"
         app:iconTintActive="#4d79ff"
-        app:menu="@menu/friends_menu"/>
+        app:indicatorColor="#b3c6ff"
+        app:menu="@menu/friends_menu"
+        app:textColor="#4d79ff" />
 
     <ProgressBar
         android:id="@+id/openingAppProgress_Bar"

@@ -72,7 +72,7 @@
                         android:id="@+id/userNameETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#e6e6e6"
+                        app:boxBackgroundColor="#ffffff"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -90,7 +90,7 @@
                         android:id="@+id/firstNameETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#e6e6e6"
+                        app:boxBackgroundColor="#ffffff"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -108,7 +108,7 @@
                         android:id="@+id/lastNameETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#e6e6e6"
+                        app:boxBackgroundColor="#ffffff"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -161,7 +161,7 @@
                         android:id="@+id/mobileNoETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#e6e6e6"
+                        app:boxBackgroundColor="#ffffff"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -180,7 +180,7 @@
                         android:id="@+id/userEmailETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#e6e6e6"
+                        app:boxBackgroundColor="#ffffff"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 
@@ -198,7 +198,7 @@
                         android:id="@+id/userPasswordETId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#e6e6e6"
+                        app:boxBackgroundColor="#ffffff"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp">
 

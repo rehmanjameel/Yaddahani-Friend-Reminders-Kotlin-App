@@ -82,24 +82,14 @@ class LoginFragment : Fragment() {
         }
         else if (checkEmail != null) {
             Log.e("Checking2", checkEmail.isNotEmpty().toString())
-
-//            if (checkEmail.isNotEmpty()) {
                 val fragmentManager = parentFragmentManager
                 fragmentManager.popBackStack()
                 fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
                     .addToBackStack(null).commit()
-//            }
         }
-//        if (getToken != "") {
-//            val intent = Intent(activity, HomeActivity::class.java)
-//            startActivity(intent)
-//            requireActivity().overridePendingTransition(0,0)
-//            this.activity?.finish()
-//        }
 
         //
         loginButton.setOnClickListener {
-
             loginUser()
         }
 
@@ -200,10 +190,9 @@ class LoginFragment : Fragment() {
                     build.create().dismiss()
                 }
                 build.setTitle("Login Error")
-                build.setMessage("User ${loginResponse.reason}")
+                build.setMessage("User ${loginResponse.reason} create new account")
                 build.setCancelable(false)
                 build.create().show()
-//                Toast.makeText(requireContext(), loginResponse.reason, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -217,7 +206,6 @@ class LoginFragment : Fragment() {
             build.setMessage(it.reason)
             build.setCancelable(false)
             build.create().show()
-//            Toast.makeText(requireContext(), it.reason, Toast.LENGTH_SHORT).show()
             Log.e("Login Response", it.reason)
         }
 
