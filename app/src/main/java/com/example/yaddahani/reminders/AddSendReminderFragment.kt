@@ -36,10 +36,8 @@ class AddSendReminderFragment : Fragment() {
 
     lateinit var timeView: TextView
     lateinit var timePicker: TimePicker
-//    lateinit var moreActionButton: ImageView
     private lateinit var bottomNavigationView: SmoothBottomBar
     val appGlobals = AppGlobals()
-    private val remindersArgs by navArgs<SendReminderToFriendFragmentArgs>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -55,13 +53,9 @@ class AddSendReminderFragment : Fragment() {
 
         timeView = view.timeTextView
         timePicker = view.sendReminderTimePickerId
-//        moreActionButton = view.sendFriendReminderMoreVertIt
 
         val sharedValue = appGlobals.getValueString("selectedFriendName")
         Log.e("Value", sharedValue.toString())
-//        val getValue = arguments!!.getString("selectedFriend")
-
-//        Log.e("Value", getValue.toString())
 
         view.sendReminderButtonId.setOnClickListener {
             sendReminder()
@@ -180,11 +174,6 @@ class AddSendReminderFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(requireContext(),
             { _, selectedYear, selectedMonth, selectedDayOfMonth ->    //This statement will be executed once the datePicker dialogue displayed
-//                Toast.makeText(
-//                    requireContext(),
-//                    "The Chosen year is $year, the month is $month, and the day is $selectedDayOfMonth",
-//                    Toast.LENGTH_LONG
-//                ).show()
                 val selectedDate = "$selectedDayOfMonth-${selectedMonth + 1}-$selectedYear"
                 sendReminderDatePickerETId.setText(selectedDate)
             }, year, month, day
@@ -192,12 +181,5 @@ class AddSendReminderFragment : Fragment() {
         datePickerDialog.datePicker.minDate = myCalendar.timeInMillis
         datePickerDialog.show()
     }
-
-//    override fun onDetach() {
-//        super.onDetach()
-//
-//        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
-//        bottomNavigationView.visibility = View.VISIBLE
-//    }
 
 }

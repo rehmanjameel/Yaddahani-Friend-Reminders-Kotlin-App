@@ -25,6 +25,7 @@ import com.example.yaddahani.adapters.SentRemindersAdapter
 import com.example.yaddahani.models.FriendModel
 import com.example.yaddahani.models.SearchUserModel
 import com.example.yaddahani.models.SentRemindersListModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.fragment_friend_list.*
@@ -41,8 +42,6 @@ import pk.codebase.requests.HttpResponse
 
 class FriendListFragment : Fragment() {
 
-//    private lateinit var bottomNavigationView: SmoothBottomBar
-
     companion object {
         var isForeGround: Boolean = false
         lateinit var recyclerPendingRequest: RecyclerView
@@ -50,9 +49,7 @@ class FriendListFragment : Fragment() {
         lateinit var noFriendListText : TextView
         lateinit var noPendingReuestText : TextView
     }
-//    private var progressBar : ProgressBar? = null
-//    private var i = 0
-//    val alarmReceiver = AlarmReceiver()
+
     private lateinit var floatingActionButton: FloatingActionButton
     lateinit var adapterPendingRequest: FriendsPendingRequestAdapter
     lateinit var adapterFriendList: FriendListAdapter
@@ -74,19 +71,12 @@ class FriendListFragment : Fragment() {
                 loadingDialog.dismissDialog()
             }, 1000)
 
-//        progressBar = view.friendsListProgress_Bar
-//        progressBar!!.visibility = View.VISIBLE
-//        i = progressBar!!.progress
-
         return view
     }
 
     //
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        bottomNavigationView = view.smoothBottomId
-//        bottomNavigationView.visibility = View.VISIBLE
 
         isForeGround = true
 
@@ -118,11 +108,6 @@ class FriendListFragment : Fragment() {
             findNavController().navigate(R.id.action_friendListFragmentId_to_searchFriendFragment)
         }
 
-//        val requestUserName = appGlobals.getValueString("requestUser")
-//        val requestFirstName = appGlobals.getValueString("requestFName")
-//        val requestLastName = appGlobals.getValueString("requestLName")
-//        val requestImage = appGlobals.getValueString("requestImage")
-
         //Get FriendRequest Function
         getFriendRequest(requireContext())
 
@@ -146,9 +131,6 @@ class FriendListFragment : Fragment() {
                 Log.e("here", jsonArray.length().toString())
                 modelFriendList.clear()
                 for (i in 0 until jsonArray!!.length()) {
-//                    if (!isForeGround) {
-//                        progressBar!!.progress = i
-//                    }
                     Log.e("heretthere", "called")
 
                     val jsonObject = jsonArray.getJSONObject(i)
@@ -158,7 +140,6 @@ class FriendListFragment : Fragment() {
                     val friendLastName = jsonObject.getString("last_name")
 
                     modelFriendList.add(FriendModel(friendUserName, friendImage, friendFirstName, friendLastName))
-//                    val activity: Activity = activity!!
                     adapterFriendList = FriendListAdapter(context, modelFriendList)
                     recyclerViewFriendList.adapter = adapterFriendList
                     recyclerViewFriendList.scrollToPosition(adapterFriendList.itemCount - 1)
@@ -184,12 +165,6 @@ class FriendListFragment : Fragment() {
         val headers = HttpHeaders("Authorization", "Token $token")
 
         addHttpRequest.get(AppGlobals.FRIENDS_LIST_API, headers)
-
-//        if (isForeGround) {
-//        if (progressBar != null) {
-//            progressBar!!.visibility = View.GONE
-//        }
-//        }
     }
 
     //
@@ -270,7 +245,6 @@ class FriendListFragment : Fragment() {
                 friendsModelArray.removeAt(position)
                 addedFriendsList(context)
                 adapter.notifyDataSetChanged()
-//                alarmReceiver.showNotification(context!!, "Request", "Friend Request Accepted")
             }
         }
 
@@ -313,6 +287,14 @@ class FriendListFragment : Fragment() {
         }
 
         declineHttpRequest.setOnErrorListener {
+            val builder = MaterialAlertDialogBuilder(requireContext())
+            builder.setPositiveButton("Ok") {_, _, ->
+                builder.create().dismiss()
+            }
+            builder.setTitle("Connection Problem")
+            builder.setMessage(it.reason)
+            builder.setCancelable(false)
+            builder.create().show()
 //            Log.e("Delete Request Error", activity.toString())
         }
 

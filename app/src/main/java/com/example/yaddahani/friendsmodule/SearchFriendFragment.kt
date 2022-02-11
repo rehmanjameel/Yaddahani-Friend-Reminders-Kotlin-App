@@ -63,13 +63,6 @@ class SearchFriendFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
-//        Log.e("searching", "${appGlobals.getValueString("searchedUser")}")
-//        Log.e("searching", "${appGlobals.getValueString("image")}")
-//        Log.e("searching", "${appGlobals.getValueString("firstName")}")
-//        Log.e("searching", "${appGlobals.getValueString("lastName")}")
-
-
         backArrow.setOnClickListener {
             findNavController().popBackStack(R.id.action_searchFriendFragment_to_friendListFragmentId, false)
             findNavController().popBackStack()
@@ -127,9 +120,6 @@ class SearchFriendFragment : Fragment() {
                     recyclerView.adapter!!.notifyDataSetChanged()
 
                     appGlobals.saveString("searchedUser", searchedUserName)
-//                    appGlobals.saveString("image", searchedImage)
-//                    appGlobals.saveString("firstName", searchedFirstName)
-//                    appGlobals.saveString("lastName", searchedLastName)
                 }
             } else if (friendSearchResponse.code != HttpResponse.HTTP_OK) {
                 Toast.makeText(requireContext(), friendSearchResponse.text, Toast.LENGTH_SHORT).show()

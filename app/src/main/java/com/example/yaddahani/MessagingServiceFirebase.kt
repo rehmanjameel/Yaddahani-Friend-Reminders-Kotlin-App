@@ -36,6 +36,7 @@ class MessagingServiceFirebase : FirebaseMessagingService() {
     companion object {
         var title : String = ""
         var body : String = ""
+        private lateinit var intent: Intent
     }
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
@@ -45,9 +46,6 @@ class MessagingServiceFirebase : FirebaseMessagingService() {
                 title= remoteMessage.data["title"].toString()
                 body= remoteMessage.data["body"].toString()
 
-//                Log.e("listmf", getReminderListModel.size.toString())
-
-//                val activity = Activity()
                 Log.e("foregroundnotify", FriendListFragment.isForeGround.toString())
 
                 if (title == "New Friend Request" && FriendListFragment.isForeGround) {
@@ -65,42 +63,13 @@ class MessagingServiceFirebase : FirebaseMessagingService() {
                 sendNotification(title, body)
             }
         }
-//        sendNotification(remoteMessage.notification!!.title.toString() ,remoteMessage.notification!!.body.toString())
     }
 
-//    override fun onNewToken(token: String) {
-//        super.onNewToken(token)
-////        updateFCMToken()
-//    }
-//
-//    private fun updateFCMToken() {
-//        val httpRequest = HttpRequest()
-//        val jsonObject = JSONObject()
-//
-//        httpRequest.setOnResponseListener { fcmTokenResponse ->
-//            Log.e("Tokens", fcmTokenResponse.code.toString())
-//            Log.e("Tokens", fcmTokenResponse.text)
-//
-//            if (fcmTokenResponse.code == HttpResponse.HTTP_OK) {
-//                Log.e("Tokens", fcmTokenResponse.code.toString())
-//            }
-//        }
-//        httpRequest.setOnErrorListener {
-//            Log.e("Tokens", "$it")
-//        }
-//
-//        val fcmToken = appGlobals.getValueString("saveFCMToken")
-//        val loginToken = appGlobals.getValueString("userToken")
-//        jsonObject.put("fcm_token", fcmToken)
-//        val header = HttpHeaders("Authorization", "Token $loginToken")
-//
-//        httpRequest.put(AppGlobals.FCM_TOKEN_UPDATE_API, jsonObject, header)
-//    }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun sendNotification(messageTitle: String, messageBody: String) {
+    fun sendNotification(messageTitle: String, messageBody: String) {
 
-        val intent = Intent(this, MainActivity::class.java)
+        intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val channelId = getString(R.string.default_notification_channel_id)

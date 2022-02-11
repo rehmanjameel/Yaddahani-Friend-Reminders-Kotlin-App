@@ -58,8 +58,6 @@ class RegistrationFragment : Fragment() {
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioButtons: RadioButton
 
-    //    private lateinit var sharedPreferences: SharedPreferences
-//    private lateinit var editor: SharedPreferences.Editor
     private lateinit var realPathUtil: RealPathUtils
 
     private var progressBar: ProgressBar? = null
@@ -119,13 +117,6 @@ class RegistrationFragment : Fragment() {
         registerPassword = view.findViewById(R.id.userPasswordETId)
         radioGroup = view.findViewById(R.id.radioGroupId)
 
-//        if (appGlobals.isLoggedInOrGetValueBoolean()) {
-//            val fragmentManager = parentFragmentManager
-//            fragmentManager.popBackStack()
-//            fragmentManager.beginTransaction().replace(R.id.fragment, EmailVerificationFragment())
-//                .addToBackStack(null).commit()
-//        }
-//        sharedPreferences = this.requireActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE)        //Buttons clickListeners
         registrationButton.setOnClickListener {
             registerUser()
         }
@@ -152,19 +143,6 @@ class RegistrationFragment : Fragment() {
             pickImage()
         }
     }
-//    private val requestPermissionLauncher = registerForActivityResult(
-//        RequestPermission()) { isGranted: Boolean ->
-//        if (isGranted) {
-//            // Permission is granted. Continue the action or workflow in your
-//            // app.
-//        } else {
-//            // Explain to the user that the feature is unavailable because the
-//            // features requires a permission that the user has denied. At the
-//            // same time, respect the user's decision. Don't link to system
-//            // settings in an effort to convince the user to change their
-//            // decision.
-//        }
-//    }
 
     //private function to check the image is selected or not
     private val galleryActivityResultLauncher = registerForActivityResult(
@@ -230,11 +208,6 @@ class RegistrationFragment : Fragment() {
         radioButtonText = radioButtons.text.toString()
     }
 
-    //Toast Function
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
     private fun registerUser() {
         val userName = registerUserName.editText?.text.toString()
         val firstName = registerFirstName.editText?.text.toString()
@@ -289,11 +262,7 @@ class RegistrationFragment : Fragment() {
         } else if (!isValidPasswordFormat(userPassword)) {
             registerPassword.error =
                 "min 6 characters long 1 digit a-zA-Z any alphabet and no white spaces"
-        }
-//        else if (imageRealPath == "null") {
-//            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
-//        }
-        else {
+        } else {
             progressBar!!.visibility = View.VISIBLE
             progressBar!!.progress = 100
             httpPutFunction()
@@ -390,7 +359,6 @@ class RegistrationFragment : Fragment() {
                 )
 
                 sendOTP()
-//                appGlobals.saveLoginOrBoolean(true)
             } else if (response.code != HttpResponse.HTTP_CREATED) {
                 progressBar!!.visibility = View.GONE
 
@@ -436,10 +404,6 @@ class RegistrationFragment : Fragment() {
         } catch (e: Exception) {
             Log.e("JSonException", "$e")
         }
-
-//        editor = sharedPreferences.edit()
-//        editor.putString("email", registerEmail.editText?.text.toString())
-//        editor.apply()
         httpRequest.post(AppGlobals.REGISTER_API, formData)
     }
 

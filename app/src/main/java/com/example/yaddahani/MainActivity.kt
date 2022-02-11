@@ -16,14 +16,6 @@ class MainActivity : AppCompatActivity() {
         }
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-
-//        setupActionBarWithNavController(findNavController(R.id.fragment))
-//        title = "Register"
     }
 
-    //Moving back to list fragment by clicking on back arrow button
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = findNavController(R.id.fragment)
-//        return navController.navigateUp() || super.onSupportNavigateUp()
-//    }
 }

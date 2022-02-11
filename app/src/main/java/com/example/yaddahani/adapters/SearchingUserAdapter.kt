@@ -36,6 +36,8 @@ class SearchingUserAdapter(activity: Activity, private var searchingUserModel : 
 
         Glide.with(searchActivity)
             .load("${AppGlobals.SERVER}${modelData.image}")
+            .placeholder(R.drawable.profile)
+            .error(R.drawable.broken_image_24)
             .into(holder.itemView.searchingUserImageId)
         Log.e("AdapterImage", modelData.image)
 

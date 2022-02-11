@@ -36,6 +36,8 @@ class FriendListAdapter(context: Context, private val friendModel: ArrayList<Fri
         holder.itemView.friendListNameId.text = "${friendList.friendFirstName} ${friendList.friendLastName}"
         Glide.with(friendContext)
             .load("${AppGlobals.SERVER}${friendList.images}")
+            .placeholder(R.drawable.profile)
+            .error(R.drawable.broken_image_24)
             .into(holder.itemView.friendListImageId)
 
         holder.itemView.friendListCardId.setOnClickListener {

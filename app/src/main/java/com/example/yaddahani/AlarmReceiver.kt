@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -15,22 +16,23 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.example.yaddahani.friendsmodule.HomeActivity
-
+@RequiresApi(Build.VERSION_CODES.O)
+@SuppressLint("UnsafeProtectedBroadcastReceiver")
 class AlarmReceiver: BroadcastReceiver() {
 
     private val appGlobals = AppGlobals()
-    @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("UnsafeProtectedBroadcastReceiver")
-    override fun onReceive(context: Context?, intent: Intent?) {
+    private val messagingClientService = MessagingServiceFirebase()
+
+    override fun onReceive(context: Context, intent: Intent?) {
+        Log.e("Checking notify", "Notification")
 
         val title = appGlobals.getValueString("NotificationTitle")
         val body = appGlobals.getValueString("NotificationBody")
-//        if (intent?.action == "android.intent.action.BOOT_COMPLETED") {
-            showNotification(context!!, title.toString(), body.toString())
-//        }
-        Log.e("Checking notify", "Notification")
+        Log.e("Checking ", title.toString())
 
-//        Toast.makeText(context, "Alarm", Toast.LENGTH_SHORT).show()
+//        messagingClientService.sendNotification(title.toString(), body.toString())
+        showNotification(context, title.toString(), body.toString())
+//        showNotification(context, "New Notification", "Notification")
 
         Log.e("Checking ", "Notification")
 
@@ -48,7 +50,7 @@ class AlarmReceiver: BroadcastReceiver() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun showNotification(ctx: Context, title: String, message: String) {
         val notificationManager =
-            ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            ctx.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelId = "channel"
             val name: CharSequence = "channel"

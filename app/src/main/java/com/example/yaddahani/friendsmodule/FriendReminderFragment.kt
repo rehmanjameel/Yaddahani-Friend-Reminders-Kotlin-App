@@ -79,7 +79,6 @@ class FriendReminderFragment : Fragment() {
         }
     }
 
-    private lateinit var bottomNavigationView: SmoothBottomBar
     private var progressBar: ProgressBar? = null
     private var i = 0
     private lateinit var actionMoreButton: ImageView
@@ -114,11 +113,11 @@ class FriendReminderFragment : Fragment() {
         recyclerView.adapter = getReminderListAdapter
         getReminderListAdapter.notifyDataSetChanged()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        remindersViewModel = ViewModelProvider(this)[RemindersViewModel::class.java]
 
         if (recyclerView.isEmpty()) {
             noReceivedRemindersText.visibility = View.VISIBLE
         }
+        remindersViewModel = ViewModelProvider(this)[RemindersViewModel::class.java]
 
         //ViewModelProvider
         remindersViewModel.reminderUnArchived.observe(viewLifecycleOwner, Observer { reminder ->
@@ -134,27 +133,15 @@ class FriendReminderFragment : Fragment() {
         remindersViewModel.readAllReminders.observe(viewLifecycleOwner, Observer { allReminders ->
             remindersListModel = allReminders as ArrayList<FriendsRemindersListModel>
         })
-//        Log.e("Sere", getRemindersDBList.toString())
         //
         progressBar = view.progress_Bar
         progressBar!!.visibility = View.VISIBLE
         i = progressBar!!.progress
 
-//        val loadingDialog = LoadingDialog(requireActivity())
-//
-//        loadingDialog.startDialog()
-//        Handler(Looper.getMainLooper()).postDelayed(
-//            {
-//                loadingDialog.dismissDialog()
-//            }, 1000)
-
         actionMoreButton = view.moreMenuOptionId
         actionMoreButton.setOnClickListener {
             showPopup()
         }
-
-//        getAllFriendsReminders(requireContext())
-        Log.e("Start", "2ndCall")
 
         //
         onForeGround = true
@@ -230,26 +217,11 @@ class FriendReminderFragment : Fragment() {
                             friendReminderDate, friendReminderFromName, friendReminderToName, friendReminderStatus))
 
                         //Received date time from server
-                        val dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm:ss a")
-//                        val dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-//                        val timeFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a")
-
-//                        val instant = Instant.ofEpochMilli(friendReminderDate.toLong())
-//                        val instant1 = Instant.ofEpochMilli(friendReminderDate.toLong() - (120 * 60 * 1000))
-//                        val date = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
-//                        val date1 = LocalDateTime.ofInstant(instant1, ZoneId.systemDefault())
-//                        val exactDate = dateFormatter.format(date)
-//                        val exactTime = timeFormatter.format(date)
-//                        val exactDateTime = dateTimeFormatter.format(date)
-
                         val alarmTime = friendReminderDate.toLong() - (120 * 60 * 1000)
                         val alarmDate = Date(alarmTime)
 
                         //Current date time
                         val dates = Date()
-//                        val stringFormat = SimpleDateFormat("dd-MM-yyyy hh:mm:ss a")
-//                        val dateTimeTo = stringFormat.format(dates.time)
-
                         //Set Alarm
 
                         if (alarmDate.after(dates)) {
@@ -271,7 +243,7 @@ class FriendReminderFragment : Fragment() {
                             } else {
                                 Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
                                 alarmManager.set(AlarmManager.RTC_WAKEUP,
-                                    (friendReminderDate.toLong()) - 60 * 60 * 1000,
+                                    (friendReminderDate.toLong()) - 120 * 60 * 1000,
                                     pendingIntent)
                                 Log.e("Alarm2", "Alarm")
                             }

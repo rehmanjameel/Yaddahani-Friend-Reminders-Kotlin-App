@@ -38,7 +38,7 @@
 
         <receiver
             android:name=".AlarmReceiver"
-            android:directBootAware="true"
+            android:process=":remote"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -49,7 +49,8 @@
 
         <service
             android:name=".MessagingServiceFirebase"
-            android:exported="false">
+            android:exported="false"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

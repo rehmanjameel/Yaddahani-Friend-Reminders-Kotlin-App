@@ -90,9 +90,6 @@
         <action
             android:id="@+id/action_reminderFriendFragment_to_addSendReminderFragment"
             app:destination="@id/addSendReminderFragment" />
-        <action
-            android:id="@+id/action_reminderFriendFragment_to_showSentRemindersFragment"
-            app:destination="@id/showSentRemindersFragment" />
 
     </fragment>
 
@@ -112,21 +109,6 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/showSentRemindersFragment"
-        android:name="com.example.yaddahani.reminders.ShowSentRemindersFragment"
-        android:label="fragment_show_sent_reminders"
-        tools:layout="@layout/fragment_show_sent_reminders" >
-
-        <action
-            android:id="@+id/action_showSentRemindersFragment_to_reminderFriendFragment"
-            app:destination="@id/reminderFriendFragment" />
-
-        <argument
-            android:name="sentReminders"
-            app:argType="com.example.yaddahani.models.SentRemindersListModel"/>
-
-    </fragment>
 
     <fragment
         android:id="@+id/showReceivedRemindersFragment"

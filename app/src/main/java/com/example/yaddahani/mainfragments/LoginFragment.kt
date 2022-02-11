@@ -171,8 +171,6 @@ class LoginFragment : Fragment() {
                 progressBar!!.visibility = View.GONE
                 Log.e("Login Response", loginResponse.code.toString())
 
-                Toast.makeText(requireContext(), "Login Successful", Toast.LENGTH_SHORT).show()
-
                 jsonObject = loginResponse.toJSONObject()
                 val token = jsonObject.getString("token")
                 val userName = jsonObject.getString("username")

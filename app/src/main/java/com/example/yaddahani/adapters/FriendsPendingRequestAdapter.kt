@@ -43,6 +43,8 @@ class FriendsPendingRequestAdapter(context: Context)
 
         Glide.with(requestActivity)
             .load("${AppGlobals.SERVER}${pendingRequest.image}")
+            .placeholder(R.drawable.profile)
+            .error(R.drawable.broken_image_24)
             .into(holder.itemView.friendRequestImageId)
 
         holder.itemView.confirmRequestButtonId.setOnClickListener {

@@ -74,6 +74,8 @@ class UpdateUserFragment : Fragment() {
 
         Glide.with(requireContext())
             .load("${AppGlobals.SERVER}${image}")
+            .error(R.drawable.broken_image_24)
+            .placeholder(R.drawable.profile)
             .into(view.updateProfileImageView)
 
 //        radioGroup = view.updateRadioGroupId

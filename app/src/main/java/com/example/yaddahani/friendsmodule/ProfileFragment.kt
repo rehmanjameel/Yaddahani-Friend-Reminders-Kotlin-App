@@ -36,7 +36,6 @@ class ProfileFragment : Fragment() {
 
     private lateinit var bottomNavigationView: SmoothBottomBar
 
-    private var progressBar : ProgressBar? = null
     private lateinit var updateIconImage: ImageView
     lateinit var personUserName: TextView
     lateinit var firstLastName: TextView
@@ -51,7 +50,6 @@ class ProfileFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-//        (requireActivity() as AppCompatActivity).supportActionBar!!.show()
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
@@ -60,11 +58,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottomNavigationView = activity!!.findViewById(R.id.smoothBottomId)
+        bottomNavigationView = requireActivity().findViewById(R.id.smoothBottomId)
         bottomNavigationView.visibility = View.VISIBLE
 
-//        progressBar = view.profileProgress_Bar
-//        progressBar!!.visibility = View.VISIBLE
         val loadingDialog = LoadingDialog(requireActivity())
 
         loadingDialog.startDialog()
@@ -126,9 +122,9 @@ class ProfileFragment : Fragment() {
                 val profileUserName = jsonResponse.getString("username")
                 val profileFirstName = jsonResponse.getString("first_name")
                 val profileLastName = jsonResponse.getString("last_name")
-                val profileDoB = jsonResponse.getString("date_of_birth")
+//                val profileDoB = jsonResponse.getString("date_of_birth")
                 val profilePhone = jsonResponse.getString("phone_number")
-                val profileEmail = jsonResponse.getString("email")
+//                val profileEmail = jsonResponse.getString("email")
                 val profileGender = jsonResponse.getString("gender")
                 val profileImage = jsonResponse.getString("image")
 
@@ -140,6 +136,8 @@ class ProfileFragment : Fragment() {
 //                gender.text = "Gender: $profileGender"
                 Glide.with(requireContext())
                     .load("${AppGlobals.SERVER}${profileImage}")
+                    .placeholder(R.drawable.profile)
+                    .error(R.drawable.broken_image_24)
                     .into(personImage)
 
                 //
@@ -173,7 +171,7 @@ class ProfileFragment : Fragment() {
                 val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
                 requireActivity().overridePendingTransition(0, 1)
-                this.activity!!.finish()
+                this.requireActivity().finish()
                 Log.e("Delete Account Response", deleteAccountResponse.code.toString())
             }
         }

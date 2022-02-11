@@ -190,7 +190,6 @@ class SendReminderToFriendFragment : Fragment() {
                     val sentFriendReminderStatus = jsonObject.getString("status")
                     val sentFriendReminderId = jsonObject.getString("id")
 
-//                    val loggedUser = appGlobals.getValueString("loginUsername")
                     if (sentFriendReminderToName == reminderArgs.friendsList.userName) {
                         sentReminderModelArray.add(SentRemindersListModel(sentFriendReminderId.toInt(), sentFriendReminderText,
                             sentFriendReminderDate, sentFriendReminderFromName, sentFriendReminderToName, sentFriendReminderStatus))
@@ -232,11 +231,7 @@ class SendReminderToFriendFragment : Fragment() {
 
             sentReminderArray.removeAt(position)
             adapter.notifyDataSetChanged()
-//            Toast.makeText(
-//                activity,
-//                "${reminder.sentReminderFrom} ${reminder.sentReminderText} Successfully deleted",
-//                Toast.LENGTH_SHORT
-//            ).show()
+
         }
         builder.setNegativeButton("No") { _, _ ->
         }
@@ -279,8 +274,6 @@ class SendReminderToFriendFragment : Fragment() {
 
     fun updateReminderDialog(sentRemindersListModel: SentRemindersListModel, activity: Activity) {
         val builder = AlertDialog.Builder(activity)
-//        val inflater = this.layoutInflater
-//        val dialogView = layoutInflater.inflate(R.layout.update_reminder, fragment, false)
         val dialogView = LayoutInflater.from(activity).inflate(R.layout.update_reminder, fragment, false)
         builder.setView(dialogView)
         dialogView.updateReminderTextETId.setText(sentRemindersListModel.sentReminderText)
@@ -298,7 +291,6 @@ class SendReminderToFriendFragment : Fragment() {
 
         //Date picker dialog click listener
         dialogView.updateReminderDatePickerETId.setOnClickListener {
-//            clickDatePicker(activity)
             val myCalendar = Calendar.getInstance() //This calendar class allow us to create the calendar objects
             val year = myCalendar.get(Calendar.YEAR)
             val month = myCalendar.get(Calendar.MONTH)

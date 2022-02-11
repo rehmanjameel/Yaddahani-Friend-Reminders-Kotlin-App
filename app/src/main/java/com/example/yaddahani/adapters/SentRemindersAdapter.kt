@@ -70,21 +70,18 @@ class SentRemindersAdapter(activity: Activity, private val sentReminderModel : A
         holder.itemView.sentReminderDateId.text = exactDate
         holder.itemView.sentReminderTimeId.text = exactTime
 
+        val alarmedDate = Date(milliSec.toLong())
         val dates = Date()
-        val stringFormat = SimpleDateFormat("dd-MM-yyyy hh:mm:ss a")
-        val dateTimeTo = stringFormat.format(dates.time)
-        Log.d("D", dateTimeTo.toString())
 
         when {
-            exactDateTime > dateTimeTo -> {
+            alarmedDate.after(dates) -> {
                 println("$exactDateTime is greater")
                 holder.itemView.sentReminderStatusId.text = "Pending"
             }
-            exactDateTime < dateTimeTo -> {
+            alarmedDate.before(dates) -> {
                 println("$exactDateTime is less")
                 val updateStatusHttpRequest = HttpRequest()
                 val jsonObject = JSONObject()
-//        val savedMillis = appGlobals.getValueString("saveReceivedMillis")
 
                 updateStatusHttpRequest.setOnResponseListener { statusResponse ->
 
@@ -119,10 +116,6 @@ class SentRemindersAdapter(activity: Activity, private val sentReminderModel : A
                 holder.itemView.sentReminderStatusId.text = "Reminded"
             }
         }
-//        holder.itemView.setOnClickListener{
-//            val action = SendReminderToFriendFragmentDirections.actionReminderFriendFragmentToShowSentRemindersFragment(sentModelData)
-//            holder.itemView.findNavController().navigate(action)
-//        }
 
         val isExpandable : Boolean = sentReminderModel[position].isExpand
         holder.itemView.sentReminderListId.visibility = if (isExpandable) View.VISIBLE else View.GONE
