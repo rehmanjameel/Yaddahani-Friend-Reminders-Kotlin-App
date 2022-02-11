@@ -45,6 +45,7 @@ class AlarmReceiver: BroadcastReceiver() {
 //        Toast.makeText(context, "Alarm Called", Toast.LENGTH_SHORT).show()
 //    }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun showNotification(ctx: Context, title: String, message: String) {
         val notificationManager =
             ctx.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -72,7 +73,7 @@ class AlarmReceiver: BroadcastReceiver() {
         resultIntent.putExtra("NotifyTitle", title)
         resultIntent.putExtra("NotifyMessage", message)
         stackBuilder.addNextIntent(resultIntent)
-        val resultPendingIntent: PendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        val resultPendingIntent: PendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
         builder.setContentIntent(resultPendingIntent)
         builder.setAutoCancel(true)
         notificationManager.notify(12, builder.build())

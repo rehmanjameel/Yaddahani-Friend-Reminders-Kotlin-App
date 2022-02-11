@@ -15,9 +15,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
+import androidx.core.view.isEmpty
 import androidx.core.view.size
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -33,6 +35,7 @@ import com.example.yaddahani.models.FriendsRemindersListModel
 import com.example.yaddahani.roomDB.RemindersViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_friend_reminder.*
 import kotlinx.android.synthetic.main.fragment_friend_reminder.view.*
 import me.ibrahimsn.lib.SmoothBottomBar
 import org.json.JSONArray
@@ -61,6 +64,7 @@ class FriendReminderFragment : Fragment() {
         var friendReminderText = ""
         var friendReminderDate = ""
         var friendReminderStatus = ""
+        lateinit var noReceivedRemindersText: TextView
         lateinit var recyclerView: RecyclerView
         private lateinit var remindersViewModel: RemindersViewModel
         private lateinit var getReminderListAdapter: FriendsRemindersListAdapter
@@ -105,17 +109,24 @@ class FriendReminderFragment : Fragment() {
         recyclerView = view.friendListReminderRecyclerView
         getReminderListAdapter = FriendsRemindersListAdapter(requireActivity())
 
+        noReceivedRemindersText = view.noReceivedRemindersTextId
+
         recyclerView.adapter = getReminderListAdapter
         getReminderListAdapter.notifyDataSetChanged()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         remindersViewModel = ViewModelProvider(this)[RemindersViewModel::class.java]
+
+        if (recyclerView.isEmpty()) {
+            noReceivedRemindersText.visibility = View.VISIBLE
+        }
+
         //ViewModelProvider
         remindersViewModel.reminderUnArchived.observe(viewLifecycleOwner, Observer { reminder ->
             getRemindersDBList = reminder as ArrayList<FriendsRemindersListModel>
             Log.e("Start", getRemindersDBList.size.toString())
             getReminderListAdapter.setReminderData(getRemindersDBList)
             Log.e("Sere", getRemindersDBList.toString())
+            noReceivedRemindersText.visibility = View.GONE
 
         })
 
@@ -205,6 +216,7 @@ class FriendReminderFragment : Fragment() {
                     Log.e("listi", i.toString())
 
                     val jsonObject = jsonArray.getJSONObject(i)
+//                    noReceivedRemindersText.visibility = View.GONE
 
                     friendReminderText = jsonObject.getString("reminder")
                     friendReminderFromName = jsonObject.getString("reminder_from")
@@ -250,7 +262,7 @@ class FriendReminderFragment : Fragment() {
                             alarmManager = context.getSystemService(
                                 AppCompatActivity.ALARM_SERVICE) as AlarmManager
                             val alarmIntent = Intent(context, AlarmReceiver::class.java)
-                            val pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0)
+                            val pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_IMMUTABLE)
 
                             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
                                 Log.e("Alarm", "Alarm")
@@ -259,7 +271,7 @@ class FriendReminderFragment : Fragment() {
                             } else {
                                 Log.e("Alarm1", "${friendReminderDate.toLong() - (120 * 60 * 1000)}")
                                 alarmManager.set(AlarmManager.RTC_WAKEUP,
-                                    (friendReminderDate.toLong()) - 120 * 60 * 1000,
+                                    (friendReminderDate.toLong()) - 60 * 60 * 1000,
                                     pendingIntent)
                                 Log.e("Alarm2", "Alarm")
                             }
@@ -347,6 +359,9 @@ class FriendReminderFragment : Fragment() {
             if (progressBar != null) {
                 progressBar!!.visibility = View.GONE
             }
+            noReceivedRemindersTextId.visibility = View.VISIBLE
+            noReceivedRemindersTextId.text = "Connection problem"
+
             val builder = MaterialAlertDialogBuilder(context)
             builder.setPositiveButton("Ok") {_, _ ->
                 builder.create().dismiss()

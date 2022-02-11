@@ -294,6 +294,8 @@ class RegistrationFragment : Fragment() {
 //            Toast.makeText(requireContext(), "Image not selected", Toast.LENGTH_SHORT).show()
 //        }
         else {
+            progressBar!!.visibility = View.VISIBLE
+            progressBar!!.progress = 100
             httpPutFunction()
         }
     }
@@ -374,12 +376,9 @@ class RegistrationFragment : Fragment() {
 
             if (response.code == HttpResponse.HTTP_CREATED) {
                 Log.e("Registration Response", "${response.code}")
-                progressBar!!.visibility = View.VISIBLE
-                progressBar!!.progress = 100
-                verifyAppGlobals.saveString(
-                    "RegisterEmail",
-                    registerEmail.editText?.text.toString()
-                )
+                verifyAppGlobals.saveString("RegisterEmail", registerEmail.editText?.text.toString())
+
+                progressBar!!.visibility = View.GONE
 
                 val fragmentManager = parentFragmentManager
                 fragmentManager.popBackStack()

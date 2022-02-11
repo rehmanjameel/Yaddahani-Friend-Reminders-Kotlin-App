@@ -9,10 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
@@ -40,7 +37,7 @@ import pk.codebase.requests.HttpHeaders
 import pk.codebase.requests.HttpRequest
 import pk.codebase.requests.HttpResponse
 
-@SuppressLint("NotifyDataSetChanged")
+@SuppressLint("NotifyDataSetChanged", "StaticFieldLeak")
 
 class FriendListFragment : Fragment() {
 
@@ -50,6 +47,8 @@ class FriendListFragment : Fragment() {
         var isForeGround: Boolean = false
         lateinit var recyclerPendingRequest: RecyclerView
         lateinit var recyclerViewFriendList: RecyclerView
+        lateinit var noFriendListText : TextView
+        lateinit var noPendingReuestText : TextView
     }
 //    private var progressBar : ProgressBar? = null
 //    private var i = 0
@@ -93,14 +92,16 @@ class FriendListFragment : Fragment() {
 
         floatingActionButton = view.findViewById(R.id.addFriendFloatingButton)
 
+        noPendingReuestText = view.noPendingRequestTextId
+        noFriendListText = view.noFriendsTextId
         //
         recyclerPendingRequest = view.pendingRequestsRecyclerId
         recyclerPendingRequest.layoutManager = LinearLayoutManager(context)
 
         if (recyclerPendingRequest.isEmpty()) {
-            view.noPendingRequestTextId.visibility = View.VISIBLE
+            noPendingReuestText.visibility = View.VISIBLE
         } else {
-            view.noPendingRequestTextId.visibility = View.GONE
+            noPendingReuestText.visibility = View.GONE
         }
 
         //
@@ -108,9 +109,9 @@ class FriendListFragment : Fragment() {
         recyclerViewFriendList.layoutManager = LinearLayoutManager(context)
 
         if (recyclerViewFriendList.isEmpty()) {
-            view.noFriendsTextId.visibility = View.VISIBLE
+            noFriendListText.visibility = View.VISIBLE
         } else {
-            view.noFriendsTextId.visibility = View.GONE
+            noFriendListText.visibility = View.GONE
         }
 
         floatingActionButton.setOnClickListener {
@@ -163,7 +164,8 @@ class FriendListFragment : Fragment() {
                     recyclerViewFriendList.scrollToPosition(adapterFriendList.itemCount - 1)
                     modelFriendList.reverse()
                     adapterFriendList.notifyDataSetChanged()
-                    noFriendsTextId.visibility = View.GONE
+
+                    noFriendListText.visibility = View.GONE
                 }
 
             } else if (addFriendsResponse.code != HttpResponse.HTTP_OK) {
@@ -220,7 +222,8 @@ class FriendListFragment : Fragment() {
                     recyclerPendingRequest.adapter = adapterPendingRequest
                     Log.e("adapter", adapterPendingRequest.toString())
                     adapterPendingRequest.notifyDataSetChanged()
-                    noPendingRequestTextId.visibility = View.GONE
+
+                    noPendingReuestText.visibility = View.GONE
 
                     appGlobals.saveString("requestUser", getRequestUserName)
 //                    appGlobals.saveString("requestFName", getRequestFirstName)
